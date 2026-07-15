@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { db } from '../utils/db';
 import { Icons } from '../components/UI/Icons';
-import { Breadcrumbs, Input, Textarea, Button, Alert } from '../components/UI/Shared';
+import { Input, Textarea, Alert } from '../components/UI/Shared';
+import { SimpleBreadcrumbs as Breadcrumbs } from '../components/UI/Breadcrumb';
+import { Button } from '../components/UI/Button';
 
 const Contact = () => {
   const [settings] = useState(db.getSettings());

@@ -2,42 +2,9 @@ import React, { useEffect } from 'react';
 import { Icons } from './Icons';
 
 // ==========================================
-// 1. BUTTON
+// 1. BUTTON (re-export Brovet themed Button)
 // ==========================================
-export const Button = ({ 
-  children, 
-  variant = 'primary', 
-  type = 'button', 
-  onClick, 
-  disabled = false, 
-  className = '', 
-  icon
-}) => {
-  const baseStyle = "inline-flex items-center justify-center font-semibold rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2";
-  
-  const variants = {
-    primary: "bg-primary text-white hover:bg-primary-hover active:bg-primary-dark focus:ring-primary shadow-sm hover:shadow-md",
-    secondary: "bg-secondary text-white hover:bg-secondary-hover focus:ring-secondary shadow-sm",
-    outline: "border border-neutral-border text-neutral-dark hover:bg-neutral-light focus:ring-primary",
-    danger: "bg-red-600 text-white hover:bg-red-700 active:bg-red-800 focus:ring-red-500 shadow-sm",
-    accent: "bg-accent text-white hover:bg-accent-hover focus:ring-accent shadow-sm",
-    ghost: "text-neutral-body hover:bg-neutral-light hover:text-primary focus:ring-primary"
-  };
-
-  const sizes = "px-4 py-2 text-sm";
-
-  return (
-    <button
-      type={type}
-      onClick={onClick}
-      disabled={disabled}
-      className={`${baseStyle} ${variants[variant]} ${sizes} ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`}
-    >
-      {icon && <span className="mr-2">{icon}</span>}
-      {children}
-    </button>
-  );
-};
+export { Button } from './Button';
 
 // ==========================================
 // 2. FORM ELEMENTS: INPUT, TEXTAREA, SELECT
@@ -116,46 +83,11 @@ export const Textarea = ({
   );
 };
 
-export const Select = ({ 
-  label, 
-  id, 
-  options = [], 
-  value, 
-  onChange, 
-  required = false, 
-  error, 
-  className = '',
-  ...props
-}) => {
-  return (
-    <div className={`w-full ${className}`}>
-      {label && (
-        <label htmlFor={id} className="block text-sm font-semibold text-neutral-dark mb-1.5">
-          {label} {required && <span className="text-red-500">*</span>}
-        </label>
-      )}
-      <select
-        id={id}
-        name={id}
-        value={value}
-        onChange={onChange}
-        required={required}
-        className={`w-full px-3.5 py-2.5 text-sm text-neutral-dark bg-white border rounded-md shadow-2xs transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent ${
-          error ? 'border-red-500 focus:ring-red-400' : 'border-neutral-border focus:ring-primary'
-        }`}
-        {...props}
-      >
-        <option value="">Select an option</option>
-        {options.map((opt, idx) => (
-          <option key={idx} value={opt.value !== undefined ? opt.value : opt}>
-            {opt.label !== undefined ? opt.label : opt}
-          </option>
-        ))}
-      </select>
-      {error && <p className="mt-1 text-xs text-red-500 font-medium">{error}</p>}
-    </div>
-  );
-};
+// ==========================================
+// 2b. SELECT (re-export Brovet themed Select)
+// ==========================================
+export { Select } from './Select';
+
 
 // ==========================================
 // 3. MODAL
@@ -207,137 +139,88 @@ export const Modal = ({ isOpen, onClose, title, children }) => {
 };
 
 // ==========================================
-// 4. ACCORDION / FAQ ITEM
+// 4. ACCORDION (re-export Brovet themed Accordion)
 // ==========================================
-export const AccordionItem = ({ title, children, isOpen, onToggle }) => {
-  return (
-    <div className="border border-neutral-border rounded-lg bg-white overflow-hidden shadow-2xs mb-3.5 transition-all duration-200">
-      <button
-        type="button"
-        onClick={onToggle}
-        aria-expanded={isOpen}
-        className="w-full flex items-center justify-between px-5 py-4 text-left font-semibold text-neutral-dark hover:bg-neutral-light transition-colors"
-      >
-        <span>{title}</span>
-        {isOpen ? (
-          <Icons.ChevronUp className="w-5 h-5 text-primary" />
-        ) : (
-          <Icons.ChevronDown className="w-5 h-5 text-neutral-muted" />
-        )}
-      </button>
-      {isOpen && (
-        <div className="px-5 pb-5 pt-1 text-sm text-neutral-body border-t border-neutral-light leading-relaxed bg-slate-50/50">
-          {children}
-        </div>
-      )}
-    </div>
-  );
-};
+export {
+  SimpleAccordionItem as AccordionItem,
+  Accordion,
+  AccordionPanel,
+  AccordionTrigger,
+  AccordionContent,
+} from './Accordion';
 
 // ==========================================
-// 5. TABS
+// 5. TABS (re-export Brovet themed Tabs)
 // ==========================================
-export const Tabs = ({ tabs = [], activeTab, onChange, className = '' }) => {
-  return (
-    <div className={`border-b border-neutral-border flex flex-wrap -mb-px ${className}`}>
-      {tabs.map((tab, idx) => {
-        const id = tab.id || idx;
-        const active = activeTab === id;
-        return (
-          <button
-            key={id}
-            onClick={() => onChange(id)}
-            className={`px-5 py-3 text-sm font-semibold border-b-2 transition-all duration-150 ${
-              active
-                ? 'border-primary text-primary font-bold bg-primary-light/35'
-                : 'border-transparent text-neutral-muted hover:text-neutral-dark hover:border-neutral-border'
-            }`}
-          >
-            {tab.label}
-          </button>
-        );
-      })}
-    </div>
-  );
-};
+export { SimpleTabs as Tabs, TabsList, TabsTrigger, TabsContent } from './Tabs';
 
 // ==========================================
-// 6. BREADCRUMBS
+// 5b. BADGE (re-export Brovet themed Badge)
 // ==========================================
-export const Breadcrumbs = ({ items = [] }) => {
-  return (
-    <nav className="flex items-center text-xs font-semibold text-neutral-muted space-x-1.5 uppercase tracking-wider py-4">
-      <a href="/" className="hover:text-primary transition-colors flex items-center gap-1">Home</a>
-      {items.map((item, idx) => {
-        const isLast = idx === items.length - 1;
-        return (
-          <React.Fragment key={idx}>
-            <Icons.ChevronRight className="w-3 h-3 text-neutral-border" />
-            {isLast ? (
-              <span className="text-primary truncate max-w-[200px]">{item.label}</span>
-            ) : (
-              <a href={item.path} className="hover:text-primary transition-colors truncate max-w-[200px]">{item.label}</a>
-            )}
-          </React.Fragment>
-        );
-      })}
-    </nav>
-  );
-};
+export { Badge } from './Badge';
 
 // ==========================================
-// 7. PAGINATION
+// 5c. TOOLTIP (re-export Brovet themed Tooltip)
 // ==========================================
-export const Pagination = ({ currentPage, totalPages, onPageChange }) => {
-  if (totalPages <= 1) return null;
+export {
+  SimpleTooltip as Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipProvider,
+} from './Tooltip';
 
-  const getPageNumbers = () => {
-    const pages = [];
-    for (let i = 1; i <= totalPages; i++) {
-      pages.push(i);
-    }
-    return pages;
-  };
+// ==========================================
+// 5d. TABLE / DATATABLE
+// ==========================================
+export {
+  Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableRow,
+  TableHead,
+  TableCell,
+  TableCaption,
+} from './Table';
+export { DataTable } from './DataTable';
 
-  return (
-    <div className="flex items-center justify-center space-x-1 py-8">
-      {/* Prev */}
-      <button
-        onClick={() => onPageChange(currentPage - 1)}
-        disabled={currentPage === 1}
-        className="p-2 border border-neutral-border rounded-md text-neutral-body hover:bg-neutral-light disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-        aria-label="Previous Page"
-      >
-        <Icons.ChevronLeft className="w-4 h-4" />
-      </button>
+// ==========================================
+// 5e. DROPDOWN
+// ==========================================
+export {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+} from './Dropdown';
 
-      {/* Pages */}
-      {getPageNumbers().map(p => (
-        <button
-          key={p}
-          onClick={() => onPageChange(p)}
-          className={`w-9 h-9 text-sm font-semibold rounded-md transition-colors border ${
-            currentPage === p
-              ? 'bg-primary text-white border-primary shadow-xs'
-              : 'border-neutral-border text-neutral-body hover:bg-neutral-light'
-          }`}
-        >
-          {p}
-        </button>
-      ))}
+// ==========================================
+// 5f. CALENDAR / DATE PICKER
+// ==========================================
+export { Calendar, DatePicker } from './Calendar';
 
-      {/* Next */}
-      <button
-        onClick={() => onPageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
-        className="p-2 border border-neutral-border rounded-md text-neutral-body hover:bg-neutral-light disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-        aria-label="Next Page"
-      >
-        <Icons.ChevronRight className="w-4 h-4" />
-      </button>
-    </div>
-  );
-};
+
+// ==========================================
+// 6. BREADCRUMBS (re-export Brovet themed Breadcrumb)
+// ==========================================
+export {
+  SimpleBreadcrumbs as Breadcrumbs,
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+  BreadcrumbEllipsis,
+} from './Breadcrumb';
+
+
+// ==========================================
+// 7. PAGINATION (re-export Brovet themed Pagination)
+// ==========================================
+export { SimplePagination as Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationPrevious, PaginationNext, PaginationEllipsis } from './Pagination';
 
 // ==========================================
 // 8. LOADER / SKELETON

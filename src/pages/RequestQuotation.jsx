@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { db } from '../utils/db';
 import { Icons } from '../components/UI/Icons';
-import { Breadcrumbs, Input, Select, Textarea, Button, Alert } from '../components/UI/Shared';
+import { Input, Textarea, Alert } from '../components/UI/Shared';
+import { SimpleBreadcrumbs as Breadcrumbs } from '../components/UI/Breadcrumb';
+import { Select } from '../components/UI/Select';
+import { Button } from '../components/UI/Button';
+import { DatePicker } from '../components/UI/Calendar';
 
 const RequestQuotation = () => {
   const products = db.getProducts();
@@ -15,6 +19,7 @@ const RequestQuotation = () => {
     phone: '',
     email: '',
     address: '',
+    requiredBy: '',
     message: ''
   });
 
@@ -50,6 +55,7 @@ const RequestQuotation = () => {
         phone: '',
         email: '',
         address: '',
+        requiredBy: '',
         message: ''
       });
     }, 3000);
@@ -186,6 +192,14 @@ const RequestQuotation = () => {
               onChange={(e) => setForm(prev => ({ ...prev, address: e.target.value }))}
               error={errors.address}
               required 
+            />
+
+            <DatePicker
+              label="Required by date (optional)"
+              id="requiredBy"
+              placeholder="When do you need delivery?"
+              value={form.requiredBy}
+              onChange={(iso) => setForm((prev) => ({ ...prev, requiredBy: iso }))}
             />
 
             <Textarea 

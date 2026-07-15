@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from '../context/RouterContext';
 import { db } from '../utils/db';
 import { Icons } from '../components/UI/Icons';
-import { Breadcrumbs, Button } from '../components/UI/Shared';
+import { SimpleBreadcrumbs as Breadcrumbs } from '../components/UI/Breadcrumb';
+import { Button } from '../components/UI/Button';
 
 const BlogDetails = () => {
   const { paramId, navigate } = useRouter();

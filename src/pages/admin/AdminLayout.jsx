@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useRouter } from '../../context/RouterContext';
 import { Icons } from '../../components/UI/Icons';
-import { Button } from '../../components/UI/Shared';
+import { Button } from '../../components/UI/Button';
 import {
   DashboardOverview,
   ProductsManager,

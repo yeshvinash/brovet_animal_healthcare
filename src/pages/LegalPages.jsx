@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRouter } from '../context/RouterContext';
-import { Breadcrumbs, Button } from '../components/UI/Shared';
+import { SimpleBreadcrumbs as Breadcrumbs } from '../components/UI/Breadcrumb';
+import { Button } from '../components/UI/Button';
 import { Icons } from '../components/UI/Icons';
 import LogoImg from '../assets/images/logo/brovet.png';
 

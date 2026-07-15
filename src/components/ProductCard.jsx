@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Icons } from './UI/Icons';
+import { Badge } from './UI/Badge';
+import { SimpleTooltip } from './UI/Tooltip';
 import { getProductImage } from '../data/productImages';
 
 const formatPrice = (price) => {
@@ -38,17 +40,20 @@ const ProductCard = ({ product }) => {
           />
         </div>
         {packLabel && (
-          <span className="absolute bottom-3 left-3 rounded-md bg-white/90 px-2 py-1 text-2xs font-bold uppercase tracking-wide text-primary ring-1 ring-primary/10 backdrop-blur-sm">
+          <Badge
+            variant="outline"
+            className="absolute bottom-3 left-3 bg-white/90 px-2 py-1 text-2xs font-bold ring-1 ring-primary/10 backdrop-blur-sm border-transparent text-primary"
+          >
             {packLabel}
-          </span>
+          </Badge>
         )}
       </div>
 
       <div className="flex flex-1 flex-col gap-3 border-t border-neutral-border/80 p-4 sm:p-5">
         <div className="space-y-1.5">
-          <p className="text-2xs font-bold uppercase tracking-[0.14em] text-primary">
+          <Badge variant="soft" className=" font-bold tracking-[0.14em] text-primary">
             {product.category}
-          </p>
+          </Badge>
           <h3 className="text-[0.95rem] sm:text-base font-bold leading-snug text-neutral-dark transition-colors duration-150 group-hover:text-primary line-clamp-2">
             {product.name}
           </h3>
@@ -66,10 +71,12 @@ const ProductCard = ({ product }) => {
             </span>
           )}
           {product.minOrderQty && (
-            <span className="inline-flex items-center gap-1">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
-              MOQ {product.minOrderQty}
-            </span>
+            <SimpleTooltip content={`Minimum order quantity: ${product.minOrderQty}`}>
+              <span className="inline-flex items-center gap-1">
+                <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
+                MOQ {product.minOrderQty}
+              </span>
+            </SimpleTooltip>
           )}
         </div>
 

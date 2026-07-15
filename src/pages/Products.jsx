@@ -3,7 +3,10 @@ import { useRouter } from '../context/RouterContext';
 import { db } from '../utils/db';
 import ProductCard from '../components/ProductCard';
 import { Icons } from '../components/UI/Icons';
-import { Breadcrumbs, Pagination, EmptyState } from '../components/UI/Shared';
+import { EmptyState } from '../components/UI/Shared';
+import { SimpleBreadcrumbs as Breadcrumbs } from '../components/UI/Breadcrumb';
+import { SimplePagination as Pagination } from '../components/UI/Pagination';
+import { Select } from '../components/UI/Select';
 
 const PRODUCTS_PER_PAGE = 6;
 
@@ -159,49 +162,42 @@ const Products = () => {
           </div>
 
           {/* Category Filter */}
-          <div>
-            <label className="block text-xs font-bold text-neutral-muted uppercase tracking-wider mb-2">Product Category</label>
-            <select
-              value={selectedCategory}
-              onChange={handleCategoryChange}
-              className="w-full px-3 py-2.5 text-sm border border-neutral-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-            >
-              <option value="">All Categories</option>
-              {categories.map(cat => (
-                <option key={cat.id} value={cat.name}>{cat.name}</option>
-              ))}
-            </select>
-          </div>
+          <Select
+            id="product-category"
+            label="Product Category"
+            placeholder="All Categories"
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+            options={categories.map((cat) => ({ value: cat.name, label: cat.name }))}
+            className="[&_label]:text-xs [&_label]:font-bold [&_label]:uppercase [&_label]:tracking-wider [&_label]:text-neutral-muted"
+          />
 
           {/* Animal Type Filter */}
-          <div>
-            <label className="block text-xs font-bold text-neutral-muted uppercase tracking-wider mb-2">Animal Suitability</label>
-            <select
-              value={selectedAnimal}
-              onChange={handleAnimalChange}
-              className="w-full px-3 py-2.5 text-sm border border-neutral-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-            >
-              <option value="">All Animals</option>
-              {animalTypes.map((animal, idx) => (
-                <option key={idx} value={animal}>{animal}</option>
-              ))}
-            </select>
-          </div>
+          <Select
+            id="product-animal"
+            label="Animal Suitability"
+            placeholder="All Animals"
+            value={selectedAnimal}
+            onChange={handleAnimalChange}
+            options={animalTypes}
+            className="[&_label]:text-xs [&_label]:font-bold [&_label]:uppercase [&_label]:tracking-wider [&_label]:text-neutral-muted"
+          />
 
           {/* Sorting */}
-          <div>
-            <label className="block text-xs font-bold text-neutral-muted uppercase tracking-wider mb-2">Sort Results</label>
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="w-full px-3 py-2.5 text-sm border border-neutral-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-            >
-              <option value="name-asc">Alphabetical (A - Z)</option>
-              <option value="name-desc">Alphabetical (Z - A)</option>
-              <option value="price-asc">Price (Low - High)</option>
-              <option value="price-desc">Price (High - Low)</option>
-            </select>
-          </div>
+          <Select
+            id="product-sort"
+            label="Sort Results"
+            showPlaceholder={false}
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            options={[
+              { value: 'name-asc', label: 'Alphabetical (A - Z)' },
+              { value: 'name-desc', label: 'Alphabetical (Z - A)' },
+              { value: 'price-asc', label: 'Price (Low - High)' },
+              { value: 'price-desc', label: 'Price (High - Low)' },
+            ]}
+            className="[&_label]:text-xs [&_label]:font-bold [&_label]:uppercase [&_label]:tracking-wider [&_label]:text-neutral-muted"
+          />
         </div>
 
         {/* Right Side: Product Card Grid */}

@@ -3,7 +3,11 @@ import { useRouter } from '../context/RouterContext';
 import { Icons } from '../components/UI/Icons';
 import { db } from '../utils/db';
 import ProductCard from '../components/ProductCard';
-import { AccordionItem, Button } from '../components/UI/Shared';
+import { AccordionItem } from '../components/UI/Accordion';
+import { Button } from '../components/UI/Button';
+import { Avatar } from '../components/UI/Avatar';
+import { Badge } from '../components/UI/Badge';
+import KetanImg from '../assets/images/cover/ketan_profile.png';
 
 const Home = () => {
   const { navigate } = useRouter();
@@ -35,12 +39,12 @@ const Home = () => {
 
   return (
     <div className="space-y-20 pb-20">
-      
+
       {/* 1. HERO BANNER */}
       <section className="relative overflow-hidden bg-gradient-to-r from-primary-dark via-primary to-primary-hover text-white py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
         {/* Soft grid decoration */}
         <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-        
+
         <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left Text */}
           <div className="lg:col-span-7 space-y-6 text-left">
@@ -54,10 +58,10 @@ const Home = () => {
               Accelerate livestock productivity, milk yield, and immunity. Brovet is a premier B2B manufacturer, trader, and exporter of veterinary feed supplements, calcium tonics, and mineral mixtures.
             </p>
             <div className="flex flex-wrap gap-4 pt-2">
-              <Button variant="accent" onClick={() => navigate('/products')} className="px-6 py-3 text-base shadow-lg">
+              <Button variant="accent" onClick={() => navigate('/products')} >
                 Explore Products
               </Button>
-              <Button variant="outline" onClick={() => navigate('/become-dealer')} className="border-white text-white hover:bg-white/10 px-6 py-3 text-base">
+              <Button variant="outline" onClick={() => navigate('/become-dealer')} className="border-white bg-transparent text-white hover:text-primary">
                 Become a Dealer
               </Button>
             </div>
@@ -66,9 +70,9 @@ const Home = () => {
           {/* Right Hero Image/Mockup */}
           <div className="lg:col-span-5 flex justify-center relative">
             <div className="relative w-full max-w-md aspect-square bg-white/5 rounded-2xl border border-white/10 p-4 shadow-2xl backdrop-blur-xs">
-              <img 
-                src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&q=80&w=600" 
-                alt="Healthy Dairy Cattle Livestock" 
+              <img
+                src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&q=80&w=600"
+                alt="Healthy Dairy Cattle Livestock"
                 className="w-full h-full object-cover rounded-xl shadow-inner border border-white/5"
               />
               <div className="absolute -bottom-6 -left-6 bg-white text-neutral-dark p-4 rounded-xl shadow-lg border border-neutral-border flex items-center gap-3">
@@ -128,9 +132,8 @@ const Home = () => {
             "Our focus is not just creating animal healthcare products, but creating trust. We source high-grade trace minerals and herbs to ensure that dairy farmers secure better yields and healthier livestock."
           </p>
           <div className="flex items-center gap-3 pt-2">
-            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
-              KP
-            </div>
+            <Avatar src={KetanImg} alt="Mr. Ketan Bavchandbhai Patoliya" size="lg" />
+
             <div>
               <span className="block font-bold text-neutral-dark">Mr. Ketan Bavchandbhai Patoliya</span>
               <span className="block text-xs text-neutral-muted">Managing Director, Brovet</span>
@@ -152,8 +155,8 @@ const Home = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {categories.map((cat) => (
-              <div 
-                key={cat.id} 
+              <div
+                key={cat.id}
                 className="bg-white rounded-xl border border-neutral-border p-6 shadow-premium hover:shadow-premium-hover transition-all duration-300 transform hover:-translate-y-1 cursor-pointer flex flex-col justify-between"
                 onClick={() => navigate(`/products?category=${encodeURIComponent(cat.name)}`)}
               >
@@ -238,9 +241,9 @@ const Home = () => {
       {/* 8. QUALITY ASSURANCE & INFRASTRUCTURE */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div className="relative">
-          <img 
-            src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=600" 
-            alt="Advanced Laboratory Quality Check" 
+          <img
+            src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=600"
+            alt="Advanced Laboratory Quality Check"
             className="w-full aspect-video object-cover rounded-xl shadow-premium border border-neutral-border"
           />
         </div>
@@ -296,9 +299,7 @@ const Home = () => {
                     <h4 className="font-bold text-sm text-neutral-dark leading-tight">{t.name}</h4>
                     <span className="text-3xs text-neutral-muted font-bold tracking-wide uppercase">{t.role}</span>
                   </div>
-                  <span className="px-2 py-0.5 text-3xs font-semibold text-primary bg-primary-light rounded uppercase">
-                    {t.type}
-                  </span>
+                  <Badge variant="soft">{t.type}</Badge>
                 </div>
               </div>
             ))}
@@ -318,8 +319,8 @@ const Home = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {blogs.map((blog) => (
-            <article 
-              key={blog.id} 
+            <article
+              key={blog.id}
               className="bg-white rounded-xl border border-neutral-border overflow-hidden shadow-premium hover:shadow-premium-hover transition-all duration-300 flex flex-col h-full transform hover:-translate-y-1 cursor-pointer"
               onClick={() => navigate(`/blog/${blog.id}`)}
             >

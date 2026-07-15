@@ -5,19 +5,29 @@ import { Icons } from '../components/UI/Icons';
 import ProductCard from '../components/ProductCard';
 import { getProductImage } from '../data/productImages';
 import {
-  Breadcrumbs,
-  Button,
   Modal,
   Input,
   Textarea,
   Alert,
-  AccordionItem
 } from '../components/UI/Shared';
+import { SimpleBreadcrumbs as Breadcrumbs } from '../components/UI/Breadcrumb';
+import { AccordionItem } from '../components/UI/Accordion';
+import { Button } from '../components/UI/Button';
+import { Badge } from '../components/UI/Badge';
+import { SimpleTooltip } from '../components/UI/Tooltip';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '../components/UI/Table';
 
 const ProductDetails = () => {
   const { paramId, navigate } = useRouter();
   const [product, setProduct] = useState(null);
-  
+
   // Modals & Submissions States
   const [rfqModalOpen, setRfqModalOpen] = useState(false);
   const [rfqSuccess, setRfqSuccess] = useState(false);
@@ -122,7 +132,7 @@ const ProductDetails = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-      
+
       {/* Breadcrumbs */}
       <Breadcrumbs items={[
         { label: "Products", path: "/products" },
@@ -131,28 +141,28 @@ const ProductDetails = () => {
 
       {/* Main product overview */}
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mt-4 sm:mt-6">
-        
+
         {/* Left Side: Product Image & Actions */}
         <div className="lg:col-span-5 space-y-5">
           <div className="aspect-square bg-gradient-to-b from-neutral-light to-white border border-neutral-border rounded-2xl overflow-hidden shadow-premium flex items-center justify-center">
-            <img 
-              src={getProductImage(product)} 
-              alt={product.name} 
+            <img
+              src={getProductImage(product)}
+              alt={product.name}
               className="w-full h-full object-contain p-6 sm:p-10"
             />
           </div>
-          
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <Button 
-              variant="primary" 
+            <Button
+              variant="primary"
               onClick={() => setRfqModalOpen(true)}
               className="w-full py-3"
               icon={<Icons.Send className="w-4 h-4" />}
             >
               Request Quotation
             </Button>
-            
-            <a 
+
+            <a
               href="/downloads"
               className="inline-flex items-center justify-center font-semibold rounded-md border border-neutral-border text-neutral-dark hover:bg-neutral-light focus:outline-none focus:ring-2 focus:ring-primary w-full py-3 text-sm shadow-2xs"
             >
@@ -164,9 +174,9 @@ const ProductDetails = () => {
         {/* Right Side: Primary Info */}
         <div className="lg:col-span-7 space-y-5">
           <div className="space-y-3">
-            <span className="inline-flex px-2.5 py-1 text-xs font-semibold tracking-wide text-primary bg-primary-light rounded border border-primary/20 uppercase">
+            <Badge variant="soft" className="px-2.5 py-1 text-xs">
               {product.category}
-            </span>
+            </Badge>
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-neutral-dark tracking-tight leading-tight">
               {product.name}
             </h1>
@@ -183,26 +193,30 @@ const ProductDetails = () => {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {product.minOrderQty && (
               <div className="rounded-xl border border-neutral-border bg-neutral-light/80 p-3">
-                <span className="block text-2xs uppercase tracking-wider text-neutral-muted font-bold mb-1">MOQ</span>
-                <span className="text-sm font-semibold text-neutral-dark">{product.minOrderQty}</span>
+                <SimpleTooltip content="Minimum order quantity for B2B wholesale orders">
+                  <span className="block text-2xs uppercase tracking-wider text-neutral-muted font-bold mb-1 cursor-help">
+                    MOQ
+                  </span>
+                </SimpleTooltip>
+                <span className="text-sm block font-semibold text-neutral-dark">{product.minOrderQty}</span>
               </div>
             )}
             {product.deliveryTime && (
               <div className="rounded-xl border border-neutral-border bg-neutral-light/80 p-3">
                 <span className="block text-2xs uppercase tracking-wider text-neutral-muted font-bold mb-1">Delivery</span>
-                <span className="text-sm font-semibold text-neutral-dark">{product.deliveryTime}</span>
+                <span className="text-sm block font-semibold text-neutral-dark">{product.deliveryTime}</span>
               </div>
             )}
             {product.packagingSizes && (
               <div className="rounded-xl border border-neutral-border bg-neutral-light/80 p-3">
                 <span className="block text-2xs uppercase tracking-wider text-neutral-muted font-bold mb-1">Pack Size</span>
-                <span className="text-sm font-semibold text-neutral-dark">{product.packagingSizes}</span>
+                <span className="text-sm block font-semibold text-neutral-dark">{product.packagingSizes}</span>
               </div>
             )}
             {product.suitableAnimals && (
               <div className="rounded-xl border border-neutral-border bg-neutral-light/80 p-3">
                 <span className="block text-2xs uppercase tracking-wider text-neutral-muted font-bold mb-1">Suitable For</span>
-                <span className="text-sm font-semibold text-neutral-dark">{product.suitableAnimals}</span>
+                <span className="text-sm block font-semibold text-neutral-dark">{product.suitableAnimals}</span>
               </div>
             )}
           </div>
@@ -271,10 +285,10 @@ const ProductDetails = () => {
 
       {/* Detailed Technical Specifications & Usage */}
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mt-20 pt-10 border-t border-neutral-border">
-        
+
         {/* Technical details (Specs & Dosage) */}
         <div className="lg:col-span-7 space-y-10">
-          
+
           {/* Detailed Description */}
           <div className="space-y-3">
             <h2 className="text-xl font-extrabold text-neutral-dark border-b pb-2">Detailed Product Description</h2>
@@ -286,22 +300,22 @@ const ProductDetails = () => {
             <div className="space-y-3">
               <h2 className="text-xl font-extrabold text-neutral-dark border-b pb-2">Product Specifications</h2>
               <div className="border border-neutral-border rounded-lg overflow-hidden shadow-2xs">
-                <table className="w-full text-left border-collapse text-sm">
-                  <thead>
-                    <tr className="bg-neutral-light text-neutral-dark border-b border-neutral-border font-bold">
-                      <th className="px-4 py-3">Parameter / Nutrient</th>
-                      <th className="px-4 py-3">Guaranteed Value</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-neutral-light bg-white text-neutral-body">
+                <Table>
+                  <TableHeader>
+                    <TableRow className="hover:bg-transparent">
+                      <TableHead>Parameter / Nutrient</TableHead>
+                      <TableHead>Guaranteed Value</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
                     {product.specifications.map((spec, i) => (
-                      <tr key={i} className="hover:bg-slate-50/50">
-                        <td className="px-4 py-3 font-semibold text-neutral-dark">{spec.parameter}</td>
-                        <td className="px-4 py-3">{spec.value}</td>
-                      </tr>
+                      <TableRow key={i}>
+                        <TableCell className="font-semibold text-neutral-dark">{spec.parameter}</TableCell>
+                        <TableCell>{spec.value}</TableCell>
+                      </TableRow>
                     ))}
-                  </tbody>
-                </table>
+                  </TableBody>
+                </Table>
               </div>
             </div>
           )}
@@ -356,40 +370,40 @@ const ProductDetails = () => {
           )}
 
           <form onSubmit={handleInquirySubmit} className="space-y-4">
-            <Input 
-              label="Full Name" 
-              id="inquiry_name" 
-              placeholder="Your Name" 
+            <Input
+              label="Full Name"
+              id="inquiry_name"
+              placeholder="Your Name"
               value={inquiryForm.name}
               onChange={(e) => setInquiryForm(prev => ({ ...prev, name: e.target.value }))}
-              required 
+              required
             />
             <div className="grid grid-cols-2 gap-4">
-              <Input 
-                label="Phone Number" 
-                id="inquiry_phone" 
+              <Input
+                label="Phone Number"
+                id="inquiry_phone"
                 type="tel"
-                placeholder="Mobile" 
+                placeholder="Mobile"
                 value={inquiryForm.phone}
                 onChange={(e) => setInquiryForm(prev => ({ ...prev, phone: e.target.value }))}
-                required 
+                required
               />
-              <Input 
-                label="Email Address" 
-                id="inquiry_email" 
+              <Input
+                label="Email Address"
+                id="inquiry_email"
                 type="email"
-                placeholder="Email" 
+                placeholder="Email"
                 value={inquiryForm.email}
                 onChange={(e) => setInquiryForm(prev => ({ ...prev, email: e.target.value }))}
-                required 
+                required
               />
             </div>
-            <Textarea 
-              label="Inquiry message" 
-              id="inquiry_message" 
+            <Textarea
+              label="Inquiry message"
+              id="inquiry_message"
               value={inquiryForm.message}
               onChange={(e) => setInquiryForm(prev => ({ ...prev, message: e.target.value }))}
-              required 
+              required
             />
             <Button variant="primary" type="submit" className="w-full py-2.5">
               Submit Inquiry
@@ -412,9 +426,9 @@ const ProductDetails = () => {
       )}
 
       {/* REQUEST QUOTATION MODAL */}
-      <Modal 
-        isOpen={rfqModalOpen} 
-        onClose={() => setRfqModalOpen(false)} 
+      <Modal
+        isOpen={rfqModalOpen}
+        onClose={() => setRfqModalOpen(false)}
         title={`Request Quotation (RFQ) - ${product.name}`}
       >
         {rfqSuccess ? (
@@ -428,74 +442,74 @@ const ProductDetails = () => {
         ) : (
           <form onSubmit={handleRfqSubmit} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
-              <Input 
-                label="Product Name" 
-                id="rfq_product" 
-                value={product.name} 
-                disabled 
+              <Input
+                label="Product Name"
+                id="rfq_product"
+                value={product.name}
+                disabled
               />
-              <Input 
-                label="Target Quantity (B2B)" 
-                id="rfq_qty" 
+              <Input
+                label="Target Quantity (B2B)"
+                id="rfq_qty"
                 type="number"
-                placeholder="100" 
+                placeholder="100"
                 value={rfqForm.quantity}
                 onChange={(e) => setRfqForm(prev => ({ ...prev, quantity: e.target.value }))}
-                required 
+                required
               />
             </div>
-            <Input 
-              label="Business/Company Name" 
-              id="rfq_business" 
-              placeholder="e.g. Anand Dairy Farm Cooperative" 
+            <Input
+              label="Business/Company Name"
+              id="rfq_business"
+              placeholder="e.g. Anand Dairy Farm Cooperative"
               value={rfqForm.businessName}
               onChange={(e) => setRfqForm(prev => ({ ...prev, businessName: e.target.value }))}
-              required 
+              required
             />
             <div className="grid grid-cols-2 gap-4">
-              <Input 
-                label="Contact Person" 
-                id="rfq_contact" 
-                placeholder="Authorized Name" 
+              <Input
+                label="Contact Person"
+                id="rfq_contact"
+                placeholder="Authorized Name"
                 value={rfqForm.contactPerson}
                 onChange={(e) => setRfqForm(prev => ({ ...prev, contactPerson: e.target.value }))}
-                required 
+                required
               />
-              <Input 
-                label="Mobile Number" 
-                id="rfq_phone" 
+              <Input
+                label="Mobile Number"
+                id="rfq_phone"
                 type="tel"
-                placeholder="e.g. +91 99999 88888" 
+                placeholder="e.g. +91 99999 88888"
                 value={rfqForm.phone}
                 onChange={(e) => setRfqForm(prev => ({ ...prev, phone: e.target.value }))}
-                required 
+                required
               />
             </div>
-            <Input 
-              label="Email Address" 
-              id="rfq_email" 
+            <Input
+              label="Email Address"
+              id="rfq_email"
               type="email"
-              placeholder="corporate@email.com" 
+              placeholder="corporate@email.com"
               value={rfqForm.email}
               onChange={(e) => setRfqForm(prev => ({ ...prev, email: e.target.value }))}
-              required 
+              required
             />
-            <Input 
-              label="Full Delivery Address" 
-              id="rfq_address" 
-              placeholder="City, State, Zip Code" 
+            <Input
+              label="Full Delivery Address"
+              id="rfq_address"
+              placeholder="City, State, Zip Code"
               value={rfqForm.address}
               onChange={(e) => setRfqForm(prev => ({ ...prev, address: e.target.value }))}
-              required 
+              required
             />
-            <Textarea 
-              label="Any Customization/Batch Requirements" 
-              id="rfq_message" 
-              placeholder="Write specifications, packaging requirements, or questions..." 
+            <Textarea
+              label="Any Customization/Batch Requirements"
+              id="rfq_message"
+              placeholder="Write specifications, packaging requirements, or questions..."
               value={rfqForm.message}
               onChange={(e) => setRfqForm(prev => ({ ...prev, message: e.target.value }))}
             />
-            
+
             <div className="pt-2 flex justify-end gap-3">
               <Button variant="outline" onClick={() => setRfqModalOpen(false)}>Cancel</Button>
               <Button variant="primary" type="submit">Submit RFQ Request</Button>

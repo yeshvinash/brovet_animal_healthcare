@@ -1,24 +1,28 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { db } from '../utils/db';
 import { Icons } from '../components/UI/Icons';
-import { Breadcrumbs, EmptyState } from '../components/UI/Shared';
+import { EmptyState } from '../components/UI/Shared';
+import { SimpleBreadcrumbs as Breadcrumbs } from '../components/UI/Breadcrumb';
+import { Badge } from '../components/UI/Badge';
+import { DataTable } from '../components/UI/DataTable';
+import { Button } from '../components/UI/Button';
 
 const Downloads = () => {
   const downloads = db.getDownloads();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedType, setSelectedType] = useState('');
 
-  // Extract unique document types
   const docTypes = [];
-  downloads.forEach(d => {
+  downloads.forEach((d) => {
     if (d.type && !docTypes.includes(d.type)) {
       docTypes.push(d.type);
     }
   });
 
-  const filteredDocs = downloads.filter(d => {
-    const matchesSearch = d.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          d.type.toLowerCase().includes(searchTerm.toLowerCase());
+  const filteredDocs = downloads.filter((d) => {
+    const matchesSearch =
+      d.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      d.type.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesType = selectedType === '' || d.type === selectedType;
     return matchesSearch && matchesType;
   });
@@ -27,13 +31,67 @@ const Downloads = () => {
     alert(`Downloading "${doc.title}"... \nFile Size: ${doc.size}\nFormat: PDF Document`);
   };
 
+  const columns = useMemo(
+    () => [
+      {
+        id: 'title',
+        header: 'Document Title',
+        sortable: true,
+        cell: (doc) => (
+          <span className="inline-flex items-center gap-3 font-semibold text-neutral-dark">
+            <Icons.FileText className="h-5 w-5 shrink-0 text-primary" />
+            {doc.title}
+          </span>
+        ),
+      },
+      {
+        id: 'type',
+        header: 'Type',
+        sortable: true,
+        accessorKey: 'type',
+        cell: (doc) => (
+          <Badge variant="soft" className="px-2.5 text-2xs">
+            {doc.type}
+          </Badge>
+        ),
+      },
+      {
+        id: 'size',
+        header: 'File Size',
+        accessorKey: 'size',
+        className: 'text-xs font-medium',
+      },
+      {
+        id: 'date',
+        header: 'Release Date',
+        sortable: true,
+        accessorKey: 'date',
+        className: 'text-xs',
+      },
+      {
+        id: 'action',
+        header: 'Action',
+        headerClassName: 'text-right',
+        className: 'text-right',
+        cell: (doc) => (
+          <Button
+            variant="primary"
+            size="sm"
+            onClick={() => handleDownload(doc)}
+            icon={<Icons.Download className="h-3.5 w-3.5" />}
+          >
+            Download PDF
+          </Button>
+        ),
+      },
+    ],
+    []
+  );
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-      
-      {/* Breadcrumbs */}
-      <Breadcrumbs items={[{ label: "Downloads Center" }]} />
+      <Breadcrumbs items={[{ label: 'Downloads Center' }]} />
 
-      {/* Header */}
       <div className="py-6 border-b border-neutral-border mb-10">
         <h1 className="text-3xl font-extrabold text-neutral-dark">Downloads Center</h1>
         <p className="text-neutral-muted text-sm mt-1 leading-relaxed">
@@ -41,9 +99,7 @@ const Downloads = () => {
         </p>
       </div>
 
-      {/* Search & Category Filter Controls */}
       <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-10 bg-slate-50 border p-4 rounded-xl">
-        {/* Search */}
         <div className="relative w-full md:max-w-sm">
           <input
             type="text"
@@ -55,9 +111,9 @@ const Downloads = () => {
           <Icons.Search className="w-4 h-4 text-neutral-muted absolute left-3 top-3.5" />
         </div>
 
-        {/* Types */}
         <div className="flex flex-wrap gap-2 w-full md:w-auto justify-start md:justify-end">
           <button
+            type="button"
             onClick={() => setSelectedType('')}
             className={`px-4 py-2 text-xs font-semibold rounded-md border transition-all ${
               selectedType === ''
@@ -69,6 +125,7 @@ const Downloads = () => {
           </button>
           {docTypes.map((type, idx) => (
             <button
+              type="button"
               key={idx}
               onClick={() => setSelectedType(type)}
               className={`px-4 py-2 text-xs font-semibold rounded-md border transition-all ${
@@ -83,57 +140,21 @@ const Downloads = () => {
         </div>
       </div>
 
-      {/* Downloads Table */}
       {filteredDocs.length > 0 ? (
         <div className="bg-white border border-neutral-border rounded-xl shadow-premium overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse text-sm">
-              <thead>
-                <tr className="bg-neutral-light text-neutral-dark border-b border-neutral-border font-bold">
-                  <th className="px-6 py-4">Document Title</th>
-                  <th className="px-6 py-4">Type</th>
-                  <th className="px-6 py-4">File Size</th>
-                  <th className="px-6 py-4">Release Date</th>
-                  <th className="px-6 py-4 text-right">Action</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-neutral-light text-neutral-body">
-                {filteredDocs.map((doc) => (
-                  <tr key={doc.id} className="hover:bg-slate-50/50">
-                    <td className="px-6 py-4 font-semibold text-neutral-dark flex items-center gap-3">
-                      <Icons.FileText className="w-5 h-5 text-primary flex-shrink-0" />
-                      {doc.title}
-                    </td>
-                    <td className="px-6 py-4">
-                      <span className="px-2.5 py-0.5 text-2xs font-semibold text-primary bg-primary-light border border-primary/20 rounded uppercase">
-                        {doc.type}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-xs font-medium">{doc.size}</td>
-                    <td className="px-6 py-4 text-xs">{doc.date}</td>
-                    <td className="px-6 py-4 text-right">
-                      <button
-                        onClick={() => handleDownload(doc)}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-primary hover:bg-primary-hover active:bg-primary-dark rounded transition-colors shadow-2xs"
-                      >
-                        <Icons.Download className="w-3.5 h-3.5" /> Download PDF
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <DataTable columns={columns} data={filteredDocs} emptyMessage="No documents found." />
         </div>
       ) : (
         <EmptyState
           title="No Documents Found"
           description="There are no brochures or certificates matching your query. Please adjust your keywords."
           actionText="Clear Filters"
-          onAction={() => { setSearchTerm(''); setSelectedType(''); }}
+          onAction={() => {
+            setSearchTerm('');
+            setSelectedType('');
+          }}
         />
       )}
-
     </div>
   );
 };

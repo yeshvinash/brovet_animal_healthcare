@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { db } from '../utils/db';
 import { Icons } from '../components/UI/Icons';
-import { Breadcrumbs, Input, Textarea, Select, Button, Alert } from '../components/UI/Shared';
+import { Input, Textarea, Alert } from '../components/UI/Shared';
+import { SimpleBreadcrumbs as Breadcrumbs } from '../components/UI/Breadcrumb';
+import { Select } from '../components/UI/Select';
+import { Button } from '../components/UI/Button';
+import { Tabs, TabsList, TabsTrigger } from '../components/UI/Tabs';
+import { Badge } from '../components/UI/Badge';
 
 const Testimonials = () => {
   const [success, setSuccess] = useState(false);
@@ -64,21 +69,15 @@ const Testimonials = () => {
         {/* Left Side: Listing Grid */}
         <div className="lg:col-span-8 space-y-8">
           {/* Toggles */}
-          <div className="flex flex-wrap gap-2 border-b pb-4">
-            {['All', 'Farmer', 'Veterinarian', 'Dealer', 'Distributor'].map(type => (
-              <button
-                key={type}
-                onClick={() => setActiveFilter(type)}
-                className={`px-4 py-2 text-xs font-semibold rounded-md border transition-all ${
-                  activeFilter === type
-                    ? 'bg-primary text-white border-primary shadow-xs'
-                    : 'bg-white text-neutral-body border-neutral-border hover:bg-neutral-light'
-                }`}
-              >
-                {type}s
-              </button>
-            ))}
-          </div>
+          <Tabs value={activeFilter} onValueChange={setActiveFilter}>
+            <TabsList variant="pills" className="pb-1">
+              {['All', 'Farmer', 'Veterinarian', 'Dealer', 'Distributor'].map((type) => (
+                <TabsTrigger key={type} value={type} className="text-xs">
+                  {type}s
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </Tabs>
 
           {success && (
             <Alert type="success" message="Thank you! Your testimonial has been posted and is now live." />
@@ -107,9 +106,7 @@ const Testimonials = () => {
                     <h4 className="font-bold text-neutral-dark text-sm leading-tight">{t.name}</h4>
                     <span className="text-3xs text-neutral-muted block font-semibold uppercase">{t.role} ({t.location})</span>
                   </div>
-                  <span className="px-2 py-0.5 text-3xs font-semibold text-primary bg-primary-light rounded border border-primary/20 uppercase">
-                    {t.type}
-                  </span>
+                  <Badge variant="soft">{t.type}</Badge>
                 </div>
               </div>
             ))}

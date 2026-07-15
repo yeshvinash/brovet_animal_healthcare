@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Breadcrumbs, AccordionItem } from '../components/UI/Shared';
+import { SimpleBreadcrumbs as Breadcrumbs } from '../components/UI/Breadcrumb';
+import { AccordionItem } from '../components/UI/Accordion';
 import { Icons } from '../components/UI/Icons';
 
 const FAQs = () => {

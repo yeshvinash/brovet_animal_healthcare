@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
 import { db } from '../../utils/db';
 import { Icons } from '../../components/UI/Icons';
-import { Input, Textarea, Select, Button, Alert, EmptyState, Modal } from '../../components/UI/Shared';
+import { Input, Textarea, Alert, EmptyState, Modal } from '../../components/UI/Shared';
+import { Select } from '../../components/UI/Select';
+import { Button } from '../../components/UI/Button';
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from '../../components/UI/Table';
 
 // ========================================================
 // 1. DASHBOARD OVERVIEW MODULE
@@ -267,37 +277,37 @@ export const ProductsManager = () => {
           </div>
 
           <div className="bg-white border rounded-xl shadow-premium overflow-hidden">
-            <table className="w-full text-left text-xs">
-              <thead className="bg-neutral-light text-neutral-dark font-bold border-b">
-                <tr>
-                  <th className="px-6 py-4">Image</th>
-                  <th className="px-6 py-4">Name</th>
-                  <th className="px-6 py-4">Category</th>
-                  <th className="px-6 py-4">Packaging Sizes</th>
-                  <th className="px-6 py-4 text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-neutral-light text-neutral-body">
+            <Table className="text-xs">
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="px-6 py-4">Image</TableHead>
+                  <TableHead className="px-6 py-4">Name</TableHead>
+                  <TableHead className="px-6 py-4">Category</TableHead>
+                  <TableHead className="px-6 py-4">Packaging Sizes</TableHead>
+                  <TableHead className="px-6 py-4 text-right">Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {products.map((prod) => (
-                  <tr key={prod.id} className="hover:bg-slate-50/50">
-                    <td className="px-6 py-4">
+                  <TableRow key={prod.id} className="hover:bg-slate-50/50">
+                    <TableCell className="px-6 py-4">
                       <img src={prod.image} alt={prod.name} className="w-10 h-10 object-cover rounded border" />
-                    </td>
-                    <td className="px-6 py-4 font-bold text-neutral-dark">{prod.name}</td>
-                    <td className="px-6 py-4">{prod.category}</td>
-                    <td className="px-6 py-4">{prod.packagingSizes}</td>
-                    <td className="px-6 py-4 text-right space-x-2">
+                    </TableCell>
+                    <TableCell className="px-6 py-4 font-bold text-neutral-dark">{prod.name}</TableCell>
+                    <TableCell className="px-6 py-4">{prod.category}</TableCell>
+                    <TableCell className="px-6 py-4">{prod.packagingSizes}</TableCell>
+                    <TableCell className="px-6 py-4 text-right space-x-2">
                       <button onClick={() => handleEdit(prod)} className="p-1 hover:text-primary transition-colors">
                         <Icons.Edit className="w-4 h-4" />
                       </button>
                       <button onClick={() => handleDelete(prod.id)} className="p-1 hover:text-red-600 transition-colors">
                         <Icons.Trash className="w-4 h-4" />
                       </button>
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           </div>
         </>
       )}
@@ -332,28 +342,28 @@ export const CategoriesManager = () => {
       {/* List */}
       <div className="md:col-span-8 bg-white border rounded-xl shadow-premium overflow-hidden">
         <h3 className="font-extrabold text-neutral-dark text-sm px-6 py-4 border-b">Active Product Categories</h3>
-        <table className="w-full text-left text-xs">
-          <thead className="bg-neutral-light border-b text-neutral-dark">
-            <tr>
-              <th className="px-6 py-4">ID</th>
-              <th className="px-6 py-4">Category Name</th>
-              <th className="px-6 py-4 text-right">Delete</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-neutral-light text-neutral-body">
+        <Table className="text-xs">
+          <TableHeader>
+            <TableRow>
+              <TableHead className="px-6 py-4">ID</TableHead>
+              <TableHead className="px-6 py-4">Category Name</TableHead>
+              <TableHead className="px-6 py-4 text-right">Delete</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {categories.map((c) => (
-              <tr key={c.id}>
-                <td className="px-6 py-4 font-semibold text-neutral-muted">{c.id}</td>
-                <td className="px-6 py-4 font-bold text-neutral-dark">{c.name}</td>
-                <td className="px-6 py-4 text-right">
+              <TableRow key={c.id}>
+                <TableCell className="px-6 py-4 font-semibold text-neutral-muted">{c.id}</TableCell>
+                <TableCell className="px-6 py-4 font-bold text-neutral-dark">{c.name}</TableCell>
+                <TableCell className="px-6 py-4 text-right">
                   <button onClick={() => handleDelete(c.id)} className="p-1 text-neutral-muted hover:text-red-600 transition-colors">
                     <Icons.Trash className="w-4 h-4" />
                   </button>
-                </td>
-              </tr>
+                </TableCell>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
 
       {/* Form */}
@@ -500,35 +510,35 @@ export const BlogsManager = () => {
           </div>
 
           <div className="bg-white border rounded-xl shadow-premium overflow-hidden">
-            <table className="w-full text-left text-xs">
-              <thead className="bg-neutral-light border-b font-bold text-neutral-dark">
-                <tr>
-                  <th className="px-6 py-4">Title</th>
-                  <th className="px-6 py-4">Category</th>
-                  <th className="px-6 py-4">Date</th>
-                  <th className="px-6 py-4">Author</th>
-                  <th className="px-6 py-4 text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-neutral-light text-neutral-body">
+            <Table className="text-xs">
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="px-6 py-4">Title</TableHead>
+                  <TableHead className="px-6 py-4">Category</TableHead>
+                  <TableHead className="px-6 py-4">Date</TableHead>
+                  <TableHead className="px-6 py-4">Author</TableHead>
+                  <TableHead className="px-6 py-4 text-right">Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {blogs.map((b) => (
-                  <tr key={b.id} className="hover:bg-slate-50/50">
-                    <td className="px-6 py-4 font-bold text-neutral-dark max-w-xs truncate">{b.title}</td>
-                    <td className="px-6 py-4">{b.category}</td>
-                    <td className="px-6 py-4">{b.date}</td>
-                    <td className="px-6 py-4">{b.author}</td>
-                    <td className="px-6 py-4 text-right space-x-2">
+                  <TableRow key={b.id} className="hover:bg-slate-50/50">
+                    <TableCell className="px-6 py-4 font-bold text-neutral-dark max-w-xs truncate">{b.title}</TableCell>
+                    <TableCell className="px-6 py-4">{b.category}</TableCell>
+                    <TableCell className="px-6 py-4">{b.date}</TableCell>
+                    <TableCell className="px-6 py-4">{b.author}</TableCell>
+                    <TableCell className="px-6 py-4 text-right space-x-2">
                       <button onClick={() => handleEdit(b)} className="p-1 hover:text-primary transition-colors">
                         <Icons.Edit className="w-4 h-4" />
                       </button>
                       <button onClick={() => handleDelete(b.id)} className="p-1 hover:text-red-600 transition-colors">
                         <Icons.Trash className="w-4 h-4" />
                       </button>
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           </div>
         </>
       )}
@@ -576,33 +586,33 @@ export const TestimonialsManager = () => {
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       <div className="lg:col-span-8 bg-white border rounded-xl shadow-premium overflow-hidden">
         <h3 className="font-extrabold text-neutral-dark text-sm px-6 py-4 border-b">Client Testimonials</h3>
-        <table className="w-full text-left text-xs">
-          <thead className="bg-neutral-light border-b text-neutral-dark font-bold">
-            <tr>
-              <th className="px-6 py-4">Client Name</th>
-              <th className="px-6 py-4">Category</th>
-              <th className="px-6 py-4">Feedback Quote</th>
-              <th className="px-6 py-4 text-right">Action</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-neutral-light text-neutral-body">
+        <Table className="text-xs">
+          <TableHeader>
+            <TableRow>
+              <TableHead className="px-6 py-4">Client Name</TableHead>
+              <TableHead className="px-6 py-4">Category</TableHead>
+              <TableHead className="px-6 py-4">Feedback Quote</TableHead>
+              <TableHead className="px-6 py-4 text-right">Action</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {testimonials.map((t) => (
-              <tr key={t.id}>
-                <td className="px-6 py-4 font-bold text-neutral-dark">
+              <TableRow key={t.id}>
+                <TableCell className="px-6 py-4 font-bold text-neutral-dark">
                   {t.name}
                   <span className="block text-3xs font-semibold text-neutral-muted">{t.role} ({t.location})</span>
-                </td>
-                <td className="px-6 py-4">{t.type}</td>
-                <td className="px-6 py-4 max-w-xs truncate italic">"{t.content}"</td>
-                <td className="px-6 py-4 text-right">
+                </TableCell>
+                <TableCell className="px-6 py-4">{t.type}</TableCell>
+                <TableCell className="px-6 py-4 max-w-xs truncate italic">"{t.content}"</TableCell>
+                <TableCell className="px-6 py-4 text-right">
                   <button onClick={() => handleDelete(t.id)} className="p-1 hover:text-red-600 transition-colors">
                     <Icons.Trash className="w-4 h-4" />
                   </button>
-                </td>
-              </tr>
+                </TableCell>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
 
       <div className="lg:col-span-4 bg-white border border-neutral-border rounded-2xl p-6 shadow-premium space-y-4">
@@ -739,31 +749,31 @@ export const MediaManager = () => {
         </form>
 
         <div className="bg-white border rounded-xl overflow-hidden shadow-2xs max-h-96 overflow-y-auto">
-          <table className="w-full text-left text-xs">
-            <thead className="bg-neutral-light border-b text-neutral-dark">
-              <tr>
-                <th className="px-4 py-3">Photo</th>
-                <th className="px-4 py-3">Category</th>
-                <th className="px-4 py-3 text-right">Action</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-neutral-light text-neutral-body">
+          <Table className="text-xs">
+            <TableHeader>
+              <TableRow>
+                <TableHead className="px-4 py-3">Photo</TableHead>
+                <TableHead className="px-4 py-3">Category</TableHead>
+                <TableHead className="px-4 py-3 text-right">Action</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
               {gallery.map(item => (
-                <tr key={item.id}>
-                  <td className="px-4 py-3 font-semibold flex items-center gap-2 text-neutral-dark">
+                <TableRow key={item.id}>
+                  <TableCell className="px-4 py-3 font-semibold flex items-center gap-2 text-neutral-dark">
                     <img src={item.url} alt={item.title} className="w-8 h-8 object-cover rounded" />
                     <span className="truncate max-w-[150px]">{item.title}</span>
-                  </td>
-                  <td className="px-4 py-3">{item.category}</td>
-                  <td className="px-4 py-3 text-right">
+                  </TableCell>
+                  <TableCell className="px-4 py-3">{item.category}</TableCell>
+                  <TableCell className="px-4 py-3 text-right">
                     <button onClick={() => handleDeleteGal(item.id)} className="p-1 hover:text-red-600">
                       <Icons.Trash className="w-4 h-4" />
                     </button>
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </div>
       </div>
 
@@ -802,28 +812,28 @@ export const MediaManager = () => {
         </form>
 
         <div className="bg-white border rounded-xl overflow-hidden shadow-2xs max-h-96 overflow-y-auto">
-          <table className="w-full text-left text-xs">
-            <thead className="bg-neutral-light border-b text-neutral-dark">
-              <tr>
-                <th className="px-4 py-3">Document Title</th>
-                <th className="px-4 py-3">Type</th>
-                <th className="px-4 py-3 text-right">Action</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-neutral-light text-neutral-body">
+          <Table className="text-xs">
+            <TableHeader>
+              <TableRow>
+                <TableHead className="px-4 py-3">Document Title</TableHead>
+                <TableHead className="px-4 py-3">Type</TableHead>
+                <TableHead className="px-4 py-3 text-right">Action</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
               {downloads.map(doc => (
-                <tr key={doc.id}>
-                  <td className="px-4 py-3 font-semibold text-neutral-dark truncate max-w-[180px]">{doc.title}</td>
-                  <td className="px-4 py-3">{doc.type}</td>
-                  <td className="px-4 py-3 text-right">
+                <TableRow key={doc.id}>
+                  <TableCell className="px-4 py-3 font-semibold text-neutral-dark truncate max-w-[180px]">{doc.title}</TableCell>
+                  <TableCell className="px-4 py-3">{doc.type}</TableCell>
+                  <TableCell className="px-4 py-3 text-right">
                     <button onClick={() => handleDeleteDoc(doc.id)} className="p-1 hover:text-red-600">
                       <Icons.Trash className="w-4 h-4" />
                     </button>
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </div>
       </div>
 
@@ -868,44 +878,44 @@ export const InquiriesViewer = ({ activeModule = 'dealers' }) => {
         <div className="bg-white border rounded-xl shadow-premium overflow-hidden">
           <h3 className="font-extrabold text-neutral-dark text-sm px-6 py-4 border-b">B2B Dealer Applications</h3>
           {dealers.length > 0 ? (
-            <table className="w-full text-left text-xs">
-              <thead className="bg-neutral-light border-b text-neutral-dark font-bold">
-                <tr>
-                  <th className="px-6 py-4">Applicant / Firm</th>
-                  <th className="px-6 py-4">Contact</th>
-                  <th className="px-6 py-4">State/City</th>
-                  <th className="px-6 py-4">GST Number</th>
-                  <th className="px-6 py-4">Status</th>
-                  <th className="px-6 py-4 text-right">Details</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-neutral-light text-neutral-body">
+            <Table className="text-xs">
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="px-6 py-4">Applicant / Firm</TableHead>
+                  <TableHead className="px-6 py-4">Contact</TableHead>
+                  <TableHead className="px-6 py-4">State/City</TableHead>
+                  <TableHead className="px-6 py-4">GST Number</TableHead>
+                  <TableHead className="px-6 py-4">Status</TableHead>
+                  <TableHead className="px-6 py-4 text-right">Details</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {dealers.map(d => (
-                  <tr key={d.id} className="hover:bg-slate-50/50">
-                    <td className="px-6 py-4 font-bold text-neutral-dark">
+                  <TableRow key={d.id} className="hover:bg-slate-50/50">
+                    <TableCell className="px-6 py-4 font-bold text-neutral-dark">
                       {d.fullName}
                       <span className="block text-3xs font-semibold text-neutral-muted uppercase tracking-wider">{d.companyName} ({d.businessType})</span>
-                    </td>
-                    <td className="px-6 py-4">
+                    </TableCell>
+                    <TableCell className="px-6 py-4">
                       {d.mobile}
                       <span className="block text-3xs text-neutral-muted">{d.email}</span>
-                    </td>
-                    <td className="px-6 py-4">{d.state}, {d.city}</td>
-                    <td className="px-6 py-4 font-mono font-semibold">{d.gstNumber || "N/A"}</td>
-                    <td className="px-6 py-4">
+                    </TableCell>
+                    <TableCell className="px-6 py-4">{d.state}, {d.city}</TableCell>
+                    <TableCell className="px-6 py-4 font-mono font-semibold">{d.gstNumber || "N/A"}</TableCell>
+                    <TableCell className="px-6 py-4">
                       <span className={`px-2 py-0.5 rounded font-semibold text-3xs ${
                         d.status === "Pending" ? "bg-amber-50 text-amber-800" : d.status === "Approved" ? "bg-emerald-50 text-emerald-800" : "bg-red-50 text-red-800"
                       }`}>
                         {d.status}
                       </span>
-                    </td>
-                    <td className="px-6 py-4 text-right">
+                    </TableCell>
+                    <TableCell className="px-6 py-4 text-right">
                       <Button variant="outline" onClick={() => setSelectedItem(d)} className="px-3 py-1.5 text-2xs">View</Button>
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           ) : (
             <div className="p-10"><EmptyState title="No Dealer Registrations" description="No registrations submitted yet by prospects." /></div>
           )}
@@ -917,41 +927,41 @@ export const InquiriesViewer = ({ activeModule = 'dealers' }) => {
         <div className="bg-white border rounded-xl shadow-premium overflow-hidden">
           <h3 className="font-extrabold text-neutral-dark text-sm px-6 py-4 border-b">Quotation Requests (RFQs)</h3>
           {quotations.length > 0 ? (
-            <table className="w-full text-left text-xs">
-              <thead className="bg-neutral-light border-b text-neutral-dark font-bold">
-                <tr>
-                  <th className="px-6 py-4">Product Name</th>
-                  <th className="px-6 py-4">Qty</th>
-                  <th className="px-6 py-4">Business / Buyer</th>
-                  <th className="px-6 py-4">Date</th>
-                  <th className="px-6 py-4">Status</th>
-                  <th className="px-6 py-4 text-right">Details</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-neutral-light text-neutral-body">
+            <Table className="text-xs">
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="px-6 py-4">Product Name</TableHead>
+                  <TableHead className="px-6 py-4">Qty</TableHead>
+                  <TableHead className="px-6 py-4">Business / Buyer</TableHead>
+                  <TableHead className="px-6 py-4">Date</TableHead>
+                  <TableHead className="px-6 py-4">Status</TableHead>
+                  <TableHead className="px-6 py-4 text-right">Details</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {quotations.map(q => (
-                  <tr key={q.id} className="hover:bg-slate-50/50">
-                    <td className="px-6 py-4 font-bold text-neutral-dark">{q.productName}</td>
-                    <td className="px-6 py-4 font-semibold text-primary">{q.quantity}</td>
-                    <td className="px-6 py-4">
+                  <TableRow key={q.id} className="hover:bg-slate-50/50">
+                    <TableCell className="px-6 py-4 font-bold text-neutral-dark">{q.productName}</TableCell>
+                    <TableCell className="px-6 py-4 font-semibold text-primary">{q.quantity}</TableCell>
+                    <TableCell className="px-6 py-4">
                       {q.businessName}
                       <span className="block text-3xs text-neutral-muted">{q.contactPerson} • {q.phone}</span>
-                    </td>
-                    <td className="px-6 py-4">{q.date}</td>
-                    <td className="px-6 py-4">
+                    </TableCell>
+                    <TableCell className="px-6 py-4">{q.date}</TableCell>
+                    <TableCell className="px-6 py-4">
                       <span className={`px-2 py-0.5 rounded font-semibold text-3xs ${
                         q.status === "Pending" ? "bg-amber-50 text-amber-800" : "bg-emerald-50 text-emerald-800"
                       }`}>
                         {q.status}
                       </span>
-                    </td>
-                    <td className="px-6 py-4 text-right">
+                    </TableCell>
+                    <TableCell className="px-6 py-4 text-right">
                       <Button variant="outline" onClick={() => setSelectedItem(q)} className="px-3 py-1.5 text-2xs">View</Button>
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           ) : (
             <div className="p-10"><EmptyState title="No Quotation Requests" description="No bulk quotation RFQs submitted yet." /></div>
           )}
@@ -963,44 +973,44 @@ export const InquiriesViewer = ({ activeModule = 'dealers' }) => {
         <div className="bg-white border rounded-xl shadow-premium overflow-hidden">
           <h3 className="font-extrabold text-neutral-dark text-sm px-6 py-4 border-b">Inbox Inquiries</h3>
           {messages.length > 0 ? (
-            <table className="w-full text-left text-xs">
-              <thead className="bg-neutral-light border-b text-neutral-dark font-bold">
-                <tr>
-                  <th className="px-6 py-4">Sender</th>
-                  <th className="px-6 py-4">Contact</th>
-                  <th className="px-6 py-4">Subject</th>
-                  <th className="px-6 py-4">Date</th>
-                  <th className="px-6 py-4">Status</th>
-                  <th className="px-6 py-4 text-right">Read</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-neutral-light text-neutral-body">
+            <Table className="text-xs">
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="px-6 py-4">Sender</TableHead>
+                  <TableHead className="px-6 py-4">Contact</TableHead>
+                  <TableHead className="px-6 py-4">Subject</TableHead>
+                  <TableHead className="px-6 py-4">Date</TableHead>
+                  <TableHead className="px-6 py-4">Status</TableHead>
+                  <TableHead className="px-6 py-4 text-right">Read</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {messages.map(m => (
-                  <tr key={m.id} className={`hover:bg-slate-50/50 ${!m.read ? "bg-red-50/10 font-medium" : ""}`}>
-                    <td className="px-6 py-4 font-bold text-neutral-dark">
+                  <TableRow key={m.id} className={`hover:bg-slate-50/50 ${!m.read ? "bg-red-50/10 font-medium" : ""}`}>
+                    <TableCell className="px-6 py-4 font-bold text-neutral-dark">
                       {m.name}
                       <span className="block text-3xs font-semibold text-neutral-muted uppercase tracking-wider">{m.type || "Contact Message"}</span>
-                    </td>
-                    <td className="px-6 py-4">
+                    </TableCell>
+                    <TableCell className="px-6 py-4">
                       {m.phone}
                       <span className="block text-2xs text-neutral-muted">{m.email}</span>
-                    </td>
-                    <td className="px-6 py-4 max-w-xs truncate font-semibold text-neutral-dark">{m.subject}</td>
-                    <td className="px-6 py-4">{m.date}</td>
-                    <td className="px-6 py-4">
+                    </TableCell>
+                    <TableCell className="px-6 py-4 max-w-xs truncate font-semibold text-neutral-dark">{m.subject}</TableCell>
+                    <TableCell className="px-6 py-4">{m.date}</TableCell>
+                    <TableCell className="px-6 py-4">
                       <span className={`px-2 py-0.5 rounded font-semibold text-3xs ${
                         m.read ? "bg-slate-50 text-slate-500" : "bg-red-50 text-red-800 font-bold"
                       }`}>
                         {m.read ? "Read" : "Unread"}
                       </span>
-                    </td>
-                    <td className="px-6 py-4 text-right">
+                    </TableCell>
+                    <TableCell className="px-6 py-4 text-right">
                       <Button variant="outline" onClick={() => handleReadMessage(m)} className="px-3 py-1.5 text-2xs">Read</Button>
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           ) : (
             <div className="p-10"><EmptyState title="Inbox Empty" description="No contact message inquiries received yet." /></div>
           )}
@@ -1122,6 +1132,12 @@ export const InquiriesViewer = ({ activeModule = 'dealers' }) => {
                 <strong className="text-neutral-dark block text-xs font-bold mb-0.5">Shipment Delivery Destination</strong>
                 <span>{selectedItem.address}</span>
               </div>
+              {selectedItem.requiredBy && (
+                <div>
+                  <strong className="text-neutral-dark block text-xs font-bold mb-0.5">Required By Date</strong>
+                  <span>{selectedItem.requiredBy}</span>
+                </div>
+              )}
               {selectedItem.message && (
                 <div>
                   <strong className="text-neutral-dark block text-xs font-bold mb-0.5">Buyer Specifications Message</strong>

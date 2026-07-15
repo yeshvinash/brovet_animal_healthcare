@@ -9,8 +9,8 @@ import {
 import { AuthProvider } from './context/AuthContext';
 import { db } from './utils/db';
 
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+import Navbar from './components/layout/Header/Header';
+import Footer from './components/layout/Footer/Footer';
 
 import Home from './pages/Home';
 import About from './pages/About';

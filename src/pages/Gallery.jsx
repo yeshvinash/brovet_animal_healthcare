@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { db } from '../utils/db';
 import { Icons } from '../components/UI/Icons';
-import { Breadcrumbs } from '../components/UI/Shared';
+import { SimpleBreadcrumbs as Breadcrumbs } from '../components/UI/Breadcrumb';
+import { Tabs, TabsList, TabsTrigger } from '../components/UI/Tabs';
+import { SimpleTooltip } from '../components/UI/Tooltip';
 
 const Gallery = () => {
   const gallery = db.getGallery();
@@ -29,21 +31,15 @@ const Gallery = () => {
       </div>
 
       {/* Category Tabs */}
-      <div className="border-b border-neutral-border flex flex-wrap gap-1 mb-10 overflow-x-auto pb-px">
-        {tabs.map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className={`px-5 py-3 text-sm font-semibold border-b-2 transition-all whitespace-nowrap ${
-              activeTab === tab
-                ? 'border-primary text-primary font-bold bg-primary-light/40'
-                : 'border-transparent text-neutral-muted hover:text-neutral-dark hover:border-neutral-border'
-            }`}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-10">
+        <TabsList variant="line" className="w-full overflow-x-auto">
+          {tabs.map((tab) => (
+            <TabsTrigger key={tab} value={tab}>
+              {tab}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+      </Tabs>
 
       {/* Gallery Photo Grid */}
       {filteredItems.length > 0 ? (
@@ -68,7 +64,9 @@ const Gallery = () => {
               </div>
               <div className="p-4 group-hover:hidden border-t">
                 <span className="text-3xs font-bold text-primary uppercase block mb-1">{item.category}</span>
-                <h4 className="font-bold text-xs text-neutral-dark truncate">{item.title}</h4>
+                <SimpleTooltip content={item.title} side="bottom">
+                  <h4 className="font-bold text-xs text-neutral-dark truncate">{item.title}</h4>
+                </SimpleTooltip>
               </div>
             </div>
           ))}

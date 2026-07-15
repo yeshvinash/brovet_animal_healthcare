@@ -1,5 +1,5 @@
 import React from 'react';
-import { Breadcrumbs } from '../components/UI/Shared';
+import { SimpleBreadcrumbs as Breadcrumbs } from '../components/UI/Breadcrumb';
 import { Icons } from '../components/UI/Icons';
 
 // ========================================================

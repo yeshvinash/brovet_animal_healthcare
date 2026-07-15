@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useRouter } from '../../context/RouterContext';
 import AuthShell from '../../components/auth/AuthShell';
-import { Input, Button, Alert } from '../../components/UI/Shared';
+import { Input, Alert } from '../../components/UI/Shared';
+import { Button } from '../../components/UI/Button';
 import { Icons } from '../../components/UI/Icons';
 
 const PasswordField = ({ id, label, value, onChange, placeholder = '••••••••', required = true }) => {

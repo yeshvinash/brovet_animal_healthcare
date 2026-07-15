@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useRouter } from '../context/RouterContext';
 import { db } from '../utils/db';
 import { Icons } from '../components/UI/Icons';
-import { Breadcrumbs, Input, EmptyState } from '../components/UI/Shared';
+import { Input, EmptyState } from '../components/UI/Shared';
+import { SimpleBreadcrumbs as Breadcrumbs } from '../components/UI/Breadcrumb';
 
 const Blogs = () => {
   const { navigate } = useRouter();
