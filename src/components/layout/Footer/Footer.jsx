@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Icons } from '../../UI/Icons';
 import { db } from '../../../utils/db';
 import LogoImg from '../../../assets/images/logo/brovet.png';
@@ -51,9 +52,9 @@ const Footer = () => {
                         <ul className="space-y-1 text-sm">
                             {categories.map((cat) => (
                                 <li key={cat.id}>
-                                    <a href={`/products?category=${encodeURIComponent(cat.name)}`} className="inline-flex items-center min-h-8 text-slate-400 hover:text-white transition-colors duration-150">
+                                    <Link to={`/products?category=${encodeURIComponent(cat.name)}`} className="inline-flex items-center min-h-8 text-slate-400 hover:text-white transition-colors duration-150">
                                         {cat.name}
-                                    </a>
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
@@ -64,18 +65,18 @@ const Footer = () => {
                         <h3 className="text-white font-semibold text-sm tracking-wider uppercase mb-5">Quick Links</h3>
                         <div className="grid grid-cols-2 gap-x-2 gap-y-0 text-sm">
                             <ul className="space-y-1">
-                                <li><a href="/" className="inline-flex items-center min-h-8 text-slate-400 hover:text-white transition-colors duration-150">Home</a></li>
-                                <li><a href="/about" className="inline-flex items-center min-h-8 text-slate-400 hover:text-white transition-colors duration-150">About Us</a></li>
-                                <li><a href="/why-choose-us" className="inline-flex items-center min-h-8 text-slate-400 hover:text-white transition-colors duration-150">Why Us</a></li>
-                                <li><a href="/infrastructure" className="inline-flex items-center min-h-8 text-slate-400 hover:text-white transition-colors duration-150">Infrastructure</a></li>
-                                <li><a href="/become-dealer" className="inline-flex items-center min-h-8 text-slate-400 hover:text-white transition-colors duration-150">Dealer Portal</a></li>
+                                <li><Link to="/" className="inline-flex items-center min-h-8 text-slate-400 hover:text-white transition-colors duration-150">Home</Link></li>
+                                <li><Link to="/about" className="inline-flex items-center min-h-8 text-slate-400 hover:text-white transition-colors duration-150">About Us</Link></li>
+                                <li><Link to="/why-choose-us" className="inline-flex items-center min-h-8 text-slate-400 hover:text-white transition-colors duration-150">Why Us</Link></li>
+                                <li><Link to="/infrastructure" className="inline-flex items-center min-h-8 text-slate-400 hover:text-white transition-colors duration-150">Infrastructure</Link></li>
+                                <li><Link to="/become-dealer" className="inline-flex items-center min-h-8 text-slate-400 hover:text-white transition-colors duration-150">Dealer Portal</Link></li>
                             </ul>
                             <ul className="space-y-1">
-                                <li><a href="/downloads" className="inline-flex items-center min-h-8 text-slate-400 hover:text-white transition-colors duration-150">Downloads</a></li>
-                                <li><a href="/blogs" className="inline-flex items-center min-h-8 text-slate-400 hover:text-white transition-colors duration-150">Blogs</a></li>
-                                <li><a href="/faqs" className="inline-flex items-center min-h-8 text-slate-400 hover:text-white transition-colors duration-150">FAQs</a></li>
-                                <li><a href="/gallery" className="inline-flex items-center min-h-8 text-slate-400 hover:text-white transition-colors duration-150">Gallery</a></li>
-                                <li><a href="/contact" className="inline-flex items-center min-h-8 text-slate-400 hover:text-white transition-colors duration-150">Contact</a></li>
+                                <li><Link to="/downloads" className="inline-flex items-center min-h-8 text-slate-400 hover:text-white transition-colors duration-150">Downloads</Link></li>
+                                <li><Link to="/blogs" className="inline-flex items-center min-h-8 text-slate-400 hover:text-white transition-colors duration-150">Blogs</Link></li>
+                                <li><Link to="/faqs" className="inline-flex items-center min-h-8 text-slate-400 hover:text-white transition-colors duration-150">FAQs</Link></li>
+                                <li><Link to="/gallery" className="inline-flex items-center min-h-8 text-slate-400 hover:text-white transition-colors duration-150">Gallery</Link></li>
+                                <li><Link to="/contact" className="inline-flex items-center min-h-8 text-slate-400 hover:text-white transition-colors duration-150">Contact</Link></li>
                             </ul>
                         </div>
                     </div>
@@ -123,8 +124,8 @@ const Footer = () => {
                         &copy; {new Date().getFullYear()} Brovet Animal Healthcare. All rights reserved.
                     </div>
                     <div className="flex space-x-6">
-                        <a href="/privacy-policy" className="hover:text-white transition-colors duration-150">Privacy Policy</a>
-                        <a href="/terms-conditions" className="hover:text-white transition-colors duration-150">Terms & Conditions</a>
+                        <Link to="/privacy-policy" className="hover:text-white transition-colors duration-150">Privacy Policy</Link>
+                        <Link to="/terms-conditions" className="hover:text-white transition-colors duration-150">Terms & Conditions</Link>
                     </div>
                 </div>
 
