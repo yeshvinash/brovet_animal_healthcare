@@ -101,37 +101,50 @@ export const Modal = ({ isOpen, onClose, title, children }) => {
       if (e.key === 'Escape') onClose();
     };
 
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
     document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener('keydown', handleKeyDown);
+    };
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 backdrop-blur-xs transition-opacity duration-300"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/50 backdrop-blur-xs transition-opacity duration-300"
       onClick={onClose}
       role="presentation"
     >
       <div
-        className="bg-white rounded-xl shadow-xl w-full max-w-lg border border-neutral-border overflow-hidden fade-in"
+        className="bg-white shadow-xl w-full sm:max-w-lg border border-neutral-border overflow-hidden fade-in flex flex-col max-h-[92dvh] sm:max-h-[85vh] rounded-t-2xl sm:rounded-xl pb-[env(safe-area-inset-bottom)]"
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-border bg-neutral-light">
-          <h3 id="modal-title" className="text-md font-bold text-neutral-dark">{title}</h3>
+        {/* Mobile drag affordance */}
+        <div className="sm:hidden flex justify-center pt-2 pb-1" aria-hidden="true">
+          <span className="block h-1 w-10 rounded-full bg-neutral-border" />
+        </div>
+
+        <div className="flex items-center justify-between gap-3 px-4 sm:px-6 py-3 sm:py-4 border-b border-neutral-border bg-neutral-light shrink-0">
+          <h3 id="modal-title" className="text-base sm:text-md font-bold text-neutral-dark leading-snug pr-2">
+            {title}
+          </h3>
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 text-neutral-muted hover:text-neutral-dark hover:bg-neutral-border rounded-md transition-colors"
+            className="inline-flex items-center justify-center min-h-11 min-w-11 shrink-0 text-neutral-muted hover:text-neutral-dark hover:bg-neutral-border rounded-md transition-colors"
             aria-label="Close dialog"
           >
             <Icons.X className="w-5 h-5" />
           </button>
         </div>
-        <div className="p-6 max-h-[75vh] overflow-y-auto">
+        <div className="p-4 sm:p-6 overflow-y-auto overscroll-contain flex-1 min-h-0">
           {children}
         </div>
       </div>

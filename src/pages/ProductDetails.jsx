@@ -378,7 +378,7 @@ const ProductDetails = () => {
               onChange={(e) => setInquiryForm(prev => ({ ...prev, name: e.target.value }))}
               required
             />
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
               <Input
                 label="Phone Number"
                 id="inquiry_phone"
@@ -441,7 +441,7 @@ const ProductDetails = () => {
           </div>
         ) : (
           <form onSubmit={handleRfqSubmit} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Input
                 label="Product Name"
                 id="rfq_product"
@@ -466,7 +466,7 @@ const ProductDetails = () => {
               onChange={(e) => setRfqForm(prev => ({ ...prev, businessName: e.target.value }))}
               required
             />
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
               <Input
                 label="Contact Person"
                 id="rfq_contact"
