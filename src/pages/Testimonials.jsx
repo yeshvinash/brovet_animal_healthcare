@@ -57,7 +57,7 @@ const Testimonials = () => {
 
       {/* Header */}
       <div className="py-6 border-b border-neutral-border mb-10">
-        <h1 className="text-3xl font-extrabold text-neutral-dark">Customer Testimonials</h1>
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-dark">Customer Testimonials</h1>
         <p className="text-neutral-muted text-sm mt-1 leading-relaxed">
           Read what farmers, veterinary doctors, feed retailers, and regional distributors say about Brovet's product quality.
         </p>

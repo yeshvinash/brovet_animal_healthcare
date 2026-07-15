@@ -64,8 +64,12 @@ const Navbar = () => {
     <header className="sticky top-0 z-40 w-full bg-white border-b border-neutral-border shadow-premium backdrop-blur-md bg-opacity-95">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between md:h-20 h-16">
-          <Link to="/" className="flex items-center" aria-label="Brovet home">
-            <img src={LogoImg} alt="Brovet Logo" className="max-w-max md:max-h-16 max-h-12" />
+          <Link to="/" className="flex items-center shrink-0" aria-label="Brovet home">
+            <img
+              src={LogoImg}
+              alt="Brovet Logo"
+              className="h-10 sm:h-12 md:h-14 w-auto max-w-[140px] sm:max-w-[180px] object-contain"
+            />
           </Link>
 
           <nav className="hidden lg:flex space-x-1 items-center" aria-label="Main navigation">
@@ -156,7 +160,7 @@ const Navbar = () => {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="inline-flex lg:hidden items-center justify-center p-2 rounded-md text-neutral-body hover:text-primary hover:bg-neutral-light focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              className="inline-flex lg:hidden items-center justify-center min-h-11 min-w-11 rounded-md text-neutral-body hover:text-primary hover:bg-neutral-light focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-nav"
               aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
@@ -175,20 +179,20 @@ const Navbar = () => {
           <div className="px-2 pt-3 pb-4 space-y-1">
             <Link
               to="/"
-              className="block px-3 py-2.5 rounded-md text-base font-medium text-neutral-dark hover:bg-neutral-light hover:text-primary"
+              className="flex items-center min-h-11 px-3 py-3 rounded-md text-base font-medium text-neutral-dark hover:bg-neutral-light hover:text-primary"
             >
               Home
             </Link>
 
-            <div className="space-y-1 py-1">
-              <span className="block px-3 text-xs font-semibold text-neutral-muted uppercase tracking-wider">
+            <div className="space-y-0.5 py-1">
+              <span className="block px-3 py-2 text-xs font-semibold text-neutral-muted uppercase tracking-wider">
                 About Brovet
               </span>
               {ABOUT_LINKS.map((item) => (
                 <Link
                   key={item.to}
                   to={item.to}
-                  className="block pl-6 pr-3 py-2 rounded-md text-sm font-medium text-neutral-body hover:bg-neutral-light hover:text-primary"
+                  className="flex items-center min-h-11 pl-6 pr-3 py-3 rounded-md text-sm font-medium text-neutral-body hover:bg-neutral-light hover:text-primary"
                 >
                   {item.label}
                 </Link>
@@ -197,26 +201,26 @@ const Navbar = () => {
 
             <Link
               to="/products"
-              className="block px-3 py-2.5 rounded-md text-base font-medium text-neutral-dark hover:bg-neutral-light hover:text-primary"
+              className="flex items-center min-h-11 px-3 py-3 rounded-md text-base font-medium text-neutral-dark hover:bg-neutral-light hover:text-primary"
             >
               Products
             </Link>
             <Link
               to="/become-dealer"
-              className="block px-3 py-2.5 rounded-md text-base font-medium text-neutral-dark hover:bg-neutral-light hover:text-primary"
+              className="flex items-center min-h-11 px-3 py-3 rounded-md text-base font-medium text-neutral-dark hover:bg-neutral-light hover:text-primary"
             >
               Become Dealer
             </Link>
 
-            <div className="space-y-1 py-1">
-              <span className="block px-3 text-xs font-semibold text-neutral-muted uppercase tracking-wider">
+            <div className="space-y-0.5 py-1">
+              <span className="block px-3 py-2 text-xs font-semibold text-neutral-muted uppercase tracking-wider">
                 Resources
               </span>
               {RESOURCE_LINKS.map((item) => (
                 <Link
                   key={item.to}
                   to={item.to}
-                  className="block pl-6 pr-3 py-2 rounded-md text-sm font-medium text-neutral-body hover:bg-neutral-light hover:text-primary"
+                  className="flex items-center min-h-11 pl-6 pr-3 py-3 rounded-md text-sm font-medium text-neutral-body hover:bg-neutral-light hover:text-primary"
                 >
                   {item.label}
                 </Link>
@@ -225,7 +229,7 @@ const Navbar = () => {
 
             <Link
               to="/contact"
-              className="block px-3 py-2.5 rounded-md text-base font-medium text-neutral-dark hover:bg-neutral-light hover:text-primary"
+              className="flex items-center min-h-11 px-3 py-3 rounded-md text-base font-medium text-neutral-dark hover:bg-neutral-light hover:text-primary"
             >
               Contact Us
             </Link>
@@ -240,7 +244,7 @@ const Navbar = () => {
                   <button
                     type="button"
                     onClick={handleLogout}
-                    className="w-full flex items-center justify-center px-4 py-3 text-base font-semibold text-red-600 border border-red-200 bg-red-50 rounded-md"
+                    className="w-full flex items-center justify-center min-h-11 px-4 py-3 text-base font-semibold text-red-600 border border-red-200 bg-red-50 rounded-md"
                   >
                     Sign out
                   </button>
@@ -248,7 +252,7 @@ const Navbar = () => {
               ) : null}
               <Link
                 to="/request-quotation"
-                className="w-full flex items-center justify-center px-4 py-3 text-base font-semibold text-white bg-primary hover:bg-primary-hover rounded-md shadow-md"
+                className="w-full flex items-center justify-center min-h-11 px-4 py-3 text-base font-semibold text-white bg-primary hover:bg-primary-hover rounded-md shadow-md"
               >
                 Request RFQ
               </Link>

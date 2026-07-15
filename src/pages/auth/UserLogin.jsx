@@ -23,7 +23,7 @@ const PasswordField = ({ id, label, value, onChange, placeholder = '••••
       <button
         type="button"
         onClick={() => setVisible((v) => !v)}
-        className="absolute right-3 top-[2.35rem] p-1 rounded-md text-neutral-muted hover:text-primary hover:bg-neutral-light transition"
+        className="absolute right-3 top-[2.35rem] p-1 rounded-md text-neutral-body hover:text-primary hover:bg-neutral-light transition"
         aria-label={visible ? 'Hide password' : 'Show password'}
       >
         {visible ? <Icons.EyeOff className="w-4 h-4" /> : <Icons.Eye className="w-4 h-4" />}
@@ -58,7 +58,7 @@ const UserLogin = () => {
 
   if (user) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-sm font-semibold text-neutral-muted">
+      <div className="min-h-screen flex items-center justify-center text-sm font-semibold text-neutral-body">
         Redirecting...
       </div>
     );
@@ -96,12 +96,15 @@ const UserLogin = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <div className="flex items-center justify-between text-xs">
-          <label className="inline-flex items-center gap-2 text-neutral-muted cursor-pointer select-none">
+        <div className="flex items-center justify-between gap-3 text-xs">
+          <label className="inline-flex items-center gap-2 text-neutral-body cursor-pointer select-none font-medium">
             <input type="checkbox" className="rounded border-neutral-border text-primary focus:ring-primary" />
             Remember me
           </label>
-          <span className="text-neutral-muted">Need help? <a href="/contact" className="text-primary font-semibold hover:underline">Contact us</a></span>
+          <span className="text-neutral-body text-right">
+            Need help?{' '}
+            <a href="/contact" className="text-primary font-bold hover:underline">Contact us</a>
+          </span>
         </div>
 
         <Button variant="primary" type="submit" className="w-full py-2.5 font-bold" disabled={loading}>
@@ -109,9 +112,9 @@ const UserLogin = () => {
         </Button>
       </form>
 
-      <div className="pt-2 border-t border-neutral-light text-center text-xs text-neutral-muted">
+      <div className="pt-2 border-t border-neutral-border text-center text-xs font-medium text-neutral-body">
         Staff member?{' '}
-        <a href="/admin/login" className="font-semibold text-primary hover:underline">Admin login</a>
+        <a href="/admin/login" className="font-bold text-primary hover:underline">Admin login</a>
       </div>
     </AuthShell>
   );

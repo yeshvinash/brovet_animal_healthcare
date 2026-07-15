@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { Icons } from './Icons';
+import { Button } from './Button';
 
 // ==========================================
 // 1. BUTTON (re-export Brovet themed Button)
 // ==========================================
-export { Button } from './Button';
+export { Button };
 
 // ==========================================
 // 2. FORM ELEMENTS: INPUT, TEXTAREA, SELECT
@@ -36,7 +37,7 @@ export const Input = ({
         value={value}
         onChange={onChange}
         required={required}
-        className={`w-full px-3.5 py-2.5 text-sm text-neutral-dark bg-white border rounded-md shadow-2xs transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent ${
+        className={`w-full px-3.5 py-2.5 text-sm text-neutral-dark bg-white border rounded-md shadow-2xs transition-colors duration-150 placeholder:text-neutral-muted focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent ${
           error ? 'border-red-500 focus:ring-red-400' : 'border-neutral-border focus:ring-primary'
         }`}
         {...props}
@@ -73,7 +74,7 @@ export const Textarea = ({
         onChange={onChange}
         required={required}
         rows={rows}
-        className={`w-full px-3.5 py-2.5 text-sm text-neutral-dark bg-white border rounded-md shadow-2xs transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent ${
+        className={`w-full px-3.5 py-2.5 text-sm text-neutral-dark bg-white border rounded-md shadow-2xs transition-colors duration-150 placeholder:text-neutral-muted focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent ${
           error ? 'border-red-500 focus:ring-red-400' : 'border-neutral-border focus:ring-primary'
         }`}
         {...props}
@@ -281,9 +282,9 @@ export const Alert = ({ type = 'success', message, onClose, className = '' }) =>
 export const EmptyState = ({ title = "No data found", description, actionText, onAction }) => {
   return (
     <div className="flex flex-col items-center justify-center text-center p-12 bg-neutral-light border border-dashed border-neutral-border rounded-xl">
-      <Icons.FileText className="w-12 h-12 text-neutral-muted mb-4 opacity-50" />
+      <Icons.FileText className="w-12 h-12 text-primary/35 mb-4" />
       <h4 className="text-base font-bold text-neutral-dark mb-1">{title}</h4>
-      {description && <p className="text-sm text-neutral-muted max-w-sm mb-4 leading-relaxed">{description}</p>}
+      {description && <p className="text-sm text-neutral-body max-w-sm mb-4 leading-relaxed">{description}</p>}
       {actionText && onAction && (
         <Button variant="primary" onClick={onAction}>{actionText}</Button>
       )}

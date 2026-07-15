@@ -93,7 +93,7 @@ const Downloads = () => {
       <Breadcrumbs items={[{ label: 'Downloads Center' }]} />
 
       <div className="py-6 border-b border-neutral-border mb-10">
-        <h1 className="text-3xl font-extrabold text-neutral-dark">Downloads Center</h1>
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-dark">Downloads Center</h1>
         <p className="text-neutral-muted text-sm mt-1 leading-relaxed">
           Access our official company profile, product catalog, veterinary brochures, and quality certifications.
         </p>

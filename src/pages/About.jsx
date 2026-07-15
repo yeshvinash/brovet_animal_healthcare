@@ -168,10 +168,10 @@ const About = () => {
           <h2 className="text-2xl sm:text-3xl font-extrabold text-neutral-dark">Business Growth Timeline</h2>
         </div>
 
-        <div className="relative border-l-2 border-primary-light max-w-4xl mx-auto pl-6 sm:pl-8 space-y-8 sm:space-y-10 py-2">
+        <div className="relative border-l-2 border-primary-light max-w-4xl mx-auto pl-8 sm:pl-10 space-y-8 sm:space-y-10 py-2">
           {timeline.map((item, idx) => (
             <div key={idx} className="relative">
-              <div className="absolute -left-[35px] sm:-left-[43px] top-1.5 w-6 h-6 rounded-full bg-primary border-4 border-white flex items-center justify-center shadow-md">
+              <div className="absolute -left-[41px] sm:-left-[49px] top-1.5 w-6 h-6 rounded-full bg-primary border-4 border-white flex items-center justify-center shadow-md">
                 <div className="w-1.5 h-1.5 rounded-full bg-white" />
               </div>
 

@@ -51,7 +51,7 @@ const ProductCard = ({ product }) => {
 
       <div className="flex flex-1 flex-col gap-3 border-t border-neutral-border/80 p-4 sm:p-5">
         <div className="space-y-1.5">
-          <Badge variant="soft" className=" font-bold tracking-[0.14em] text-primary">
+          <Badge variant="soft" className="text-2xs font-bold tracking-[0.14em] text-primary">
             {product.category}
           </Badge>
           <h3 className="text-[0.95rem] sm:text-base font-bold leading-snug text-neutral-dark transition-colors duration-150 group-hover:text-primary line-clamp-2">
@@ -59,11 +59,11 @@ const ProductCard = ({ product }) => {
           </h3>
         </div>
 
-        <p className="text-sm leading-relaxed text-neutral-muted line-clamp-2 flex-1">
+        <p className="text-sm leading-relaxed text-neutral-body line-clamp-2 flex-1">
           {product.shortDescription}
         </p>
 
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-2xs font-semibold text-neutral-muted">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-2xs font-semibold text-neutral-body">
           {suitableFor && (
             <span className="inline-flex items-center gap-1">
               <span className="h-1.5 w-1.5 rounded-full bg-secondary" aria-hidden="true" />
@@ -84,7 +84,7 @@ const ProductCard = ({ product }) => {
           <div className="min-w-0">
             {priceLabel ? (
               <>
-                <p className="text-2xs font-semibold uppercase tracking-wider text-neutral-muted">
+                <p className="text-2xs font-semibold uppercase tracking-wider text-neutral-body">
                   Price / piece
                 </p>
                 <p className="truncate text-xl font-extrabold tracking-tight text-primary-dark">

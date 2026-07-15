@@ -72,8 +72,8 @@ function PaginationLink({
         'inline-flex items-center justify-center gap-1.5 rounded-md border text-sm font-semibold transition-colors',
         'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
         'disabled:pointer-events-none disabled:opacity-50',
-        size === 'icon' && 'size-9',
-        size === 'default' && 'h-9 min-w-9 px-3',
+        size === 'icon' && 'size-10 min-h-10 min-w-10',
+        size === 'default' && 'h-10 min-h-10 min-w-10 px-3',
         isActive
           ? 'border-primary bg-primary text-white shadow-xs'
           : 'border-neutral-border bg-white text-neutral-body hover:border-primary/40 hover:bg-neutral-light hover:text-primary',

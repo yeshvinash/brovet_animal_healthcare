@@ -22,7 +22,7 @@
 
     --color-neutral-dark: #0f172a; /* Slate-900 (High contrast body headers) */
     --color-neutral-body: #334155; /* Slate-700 (High contrast body text) */
-    --color-neutral-muted: #64748b; /* Slate-500 (Subtext/captions) */
+    --color-neutral-muted: #475569; /* Slate-600 — stronger caption contrast */
     --color-neutral-light: #f8fafc; /* Warm grey layout background */
     --color-neutral-border: #e2e8f0; /* Soft border gray */
   }
@@ -32,11 +32,15 @@
     font-family: "Outfit", "Inter", sans-serif;
     color: var(--color-neutral-body);
     background-color: #ffffff;
+    overflow-x: clip;
   }
 
   body {
     @apply antialiased bg-white leading-relaxed;
     color: var(--color-neutral-body);
+    overflow-x: clip;
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
   }
 
   h1,

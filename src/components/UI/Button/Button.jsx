@@ -9,9 +9,11 @@ const buttonVariants = {
         'bg-secondary text-white shadow-sm hover:bg-secondary-hover focus-visible:ring-secondary',
     accent:
         'bg-accent text-white shadow-sm hover:bg-accent-hover focus-visible:ring-accent',
-    outline:
-        'border border-neutral-border bg-white text-neutral-dark hover:bg-neutral-light focus-visible:ring-primary',
-    ghost:
+  outline:
+    'border border-neutral-border bg-white text-neutral-dark hover:bg-neutral-light focus-visible:ring-primary',
+  'outline-inverse':
+    'border border-white/80 bg-transparent text-white hover:bg-white hover:text-primary-dark focus-visible:ring-white',
+  ghost:
         'border-transparent bg-transparent text-neutral-body hover:bg-neutral-light hover:text-primary focus-visible:ring-primary',
     danger:
         'bg-red-600 text-white shadow-sm hover:bg-red-700 active:bg-red-800 focus-visible:ring-red-500',
@@ -22,10 +24,10 @@ const buttonVariants = {
 };
 
 const buttonSizes = {
-    default: 'h-10 gap-2 px-4 py-2 text-sm',
+    default: 'min-h-11 h-11 gap-2 px-4 py-2 text-sm',
     sm: 'h-8 gap-1.5 px-3 py-1.5 text-xs',
-    lg: 'h-11 gap-2 px-6 py-3 text-base',
-    icon: 'size-10 p-0',
+    lg: 'min-h-12 h-12 gap-2 px-6 py-3 text-base',
+    icon: 'size-11 p-0',
     'icon-sm': 'size-8 p-0',
 };
 

@@ -66,7 +66,7 @@ const Contact = () => {
 
       {/* Primary Header */}
       <div className="py-6 border-b border-neutral-border mb-10">
-        <h1 className="text-3xl font-extrabold text-neutral-dark">Get in Touch with Brovet</h1>
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-dark">Get in Touch with Brovet</h1>
         <p className="text-neutral-muted text-sm mt-1 leading-relaxed">
           Have questions about distributorship, pricing, exports, or formulations? Contact our corporate team.
         </p>
@@ -127,17 +127,17 @@ const Contact = () => {
           {/* Social Links */}
           <div className="space-y-4">
             <h4 className="font-bold text-neutral-dark text-sm uppercase tracking-wider">Connect Online</h4>
-            <div className="flex space-x-3">
-              <a href={settings.socialLinks.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-10 h-10 rounded-lg bg-white border border-neutral-border text-neutral-muted hover:text-primary hover:border-primary flex items-center justify-center shadow-2xs transition duration-150">
+            <div className="flex flex-wrap gap-2">
+              <a href={settings.socialLinks.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-11 h-11 rounded-lg bg-white border border-neutral-border text-neutral-muted hover:text-primary hover:border-primary flex items-center justify-center shadow-2xs transition duration-150">
                 <Icons.Facebook className="w-5 h-5" />
               </a>
-              <a href={settings.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="w-10 h-10 rounded-lg bg-white border border-neutral-border text-neutral-muted hover:text-primary hover:border-primary flex items-center justify-center shadow-2xs transition duration-150">
+              <a href={settings.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="w-11 h-11 rounded-lg bg-white border border-neutral-border text-neutral-muted hover:text-primary hover:border-primary flex items-center justify-center shadow-2xs transition duration-150">
                 <Icons.Linkedin className="w-5 h-5" />
               </a>
-              <a href={settings.socialLinks.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="w-10 h-10 rounded-lg bg-white border border-neutral-border text-neutral-muted hover:text-primary hover:border-primary flex items-center justify-center shadow-2xs transition duration-150">
+              <a href={settings.socialLinks.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="w-11 h-11 rounded-lg bg-white border border-neutral-border text-neutral-muted hover:text-primary hover:border-primary flex items-center justify-center shadow-2xs transition duration-150">
                 <Icons.Youtube className="w-5 h-5" />
               </a>
-              <a href={settings.socialLinks.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="w-10 h-10 rounded-lg bg-white border border-neutral-border text-neutral-muted hover:text-primary hover:border-primary flex items-center justify-center shadow-2xs transition duration-150">
+              <a href={settings.socialLinks.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="w-11 h-11 rounded-lg bg-white border border-neutral-border text-neutral-muted hover:text-primary hover:border-primary flex items-center justify-center shadow-2xs transition duration-150">
                 <Icons.Twitter className="w-5 h-5" />
               </a>
             </div>
@@ -222,9 +222,9 @@ const Contact = () => {
       </div>
 
       {/* Embedded Map Section */}
-      <section className="mt-20 space-y-4">
+      <section className="mt-12 sm:mt-20 space-y-4">
         <h3 className="text-lg font-bold text-neutral-dark">Find Us On Google Maps</h3>
-        <div className="w-full h-96 border rounded-2xl overflow-hidden shadow-premium">
+        <div className="w-full h-56 sm:h-72 lg:h-96 border rounded-2xl overflow-hidden shadow-premium">
           <iframe 
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3738.7408801968853!2d72.91572567584671!3d20.94276189073167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be0f653456789ab%3A0x890abcdef1234567!2sJalalpore%20Road%2C%20Navsari%2C%20Gujarat%20396445!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
             className="w-full h-full border-0" 

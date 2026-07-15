@@ -14,7 +14,7 @@ export const PrivacyPolicy = () => {
       <Breadcrumbs items={[{ label: "Privacy Policy" }]} />
       
       <div className="space-y-4">
-        <h1 className="text-3xl font-extrabold text-neutral-dark">Privacy Policy</h1>
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-dark">Privacy Policy</h1>
         <p className="text-xs text-neutral-muted">Effective Date: June 01, 2026</p>
       </div>
 
@@ -56,7 +56,7 @@ export const TermsConditions = () => {
       <Breadcrumbs items={[{ label: "Terms & Conditions" }]} />
       
       <div className="space-y-4">
-        <h1 className="text-3xl font-extrabold text-neutral-dark">Terms & Conditions</h1>
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-dark">Terms & Conditions</h1>
         <p className="text-xs text-neutral-muted">Last Updated: June 01, 2026</p>
       </div>
 

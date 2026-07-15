@@ -26,7 +26,7 @@ export default {
         neutral: {
           dark: "var(--color-neutral-dark, #0f172a)",
           body: "var(--color-neutral-body, #334155)",
-          muted: "var(--color-neutral-muted, #64748b)",
+          muted: "var(--color-neutral-muted, #475569)",
           light: "var(--color-neutral-light, #f8fafc)",
           border: "var(--color-neutral-border, #e2e8f0)",
         }

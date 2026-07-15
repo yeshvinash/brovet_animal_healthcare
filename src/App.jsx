@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -8,42 +8,55 @@ import {
 } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { db } from './utils/db';
+import { Loader } from './components/UI/Shared';
+import { BootPreloader } from './components/UI/Preloader';
 
 import Navbar from './components/layout/Header/Header';
 import Footer from './components/layout/Footer/Footer';
 
-import Home from './pages/Home';
-import About from './pages/About';
-import Products from './pages/Products';
-import ProductDetails from './pages/ProductDetails';
-import BecomeDealer from './pages/BecomeDealer';
-import RequestQuotation from './pages/RequestQuotation';
-import Blogs from './pages/Blogs';
-import BlogDetails from './pages/BlogDetails';
-import Downloads from './pages/Downloads';
-import Gallery from './pages/Gallery';
-import Testimonials from './pages/Testimonials';
-import FAQs from './pages/Faqs';
-import Contact from './pages/Contact';
+/* Route-level code splitting */
+const Home = lazy(() => import('./pages/Home'));
+const About = lazy(() => import('./pages/About'));
+const Products = lazy(() => import('./pages/Products'));
+const ProductDetails = lazy(() => import('./pages/ProductDetails'));
+const BecomeDealer = lazy(() => import('./pages/BecomeDealer'));
+const RequestQuotation = lazy(() => import('./pages/RequestQuotation'));
+const Blogs = lazy(() => import('./pages/Blogs'));
+const BlogDetails = lazy(() => import('./pages/BlogDetails'));
+const Downloads = lazy(() => import('./pages/Downloads'));
+const Gallery = lazy(() => import('./pages/Gallery'));
+const Testimonials = lazy(() => import('./pages/Testimonials'));
+const FAQs = lazy(() => import('./pages/Faqs'));
+const Contact = lazy(() => import('./pages/Contact'));
 
-import {
-  WhyChooseUs,
-  Infrastructure,
-  DistributionNetwork,
-  QualityAssurance,
-} from './pages/InfoPages';
+const WhyChooseUs = lazy(() =>
+  import('./pages/InfoPages').then((m) => ({ default: m.WhyChooseUs }))
+);
+const Infrastructure = lazy(() =>
+  import('./pages/InfoPages').then((m) => ({ default: m.Infrastructure }))
+);
+const DistributionNetwork = lazy(() =>
+  import('./pages/InfoPages').then((m) => ({ default: m.DistributionNetwork }))
+);
+const QualityAssurance = lazy(() =>
+  import('./pages/InfoPages').then((m) => ({ default: m.QualityAssurance }))
+);
 
-import {
-  PrivacyPolicy,
-  TermsConditions,
-  NotFound,
-} from './pages/LegalPages';
+const PrivacyPolicy = lazy(() =>
+  import('./pages/LegalPages').then((m) => ({ default: m.PrivacyPolicy }))
+);
+const TermsConditions = lazy(() =>
+  import('./pages/LegalPages').then((m) => ({ default: m.TermsConditions }))
+);
+const NotFound = lazy(() =>
+  import('./pages/LegalPages').then((m) => ({ default: m.NotFound }))
+);
 
-import AdminLogin from './pages/admin/AdminLogin';
-import AdminSignup from './pages/admin/AdminSignup';
-import AdminLayout from './pages/admin/AdminLayout';
-import UserLogin from './pages/auth/UserLogin';
-import UserSignup from './pages/auth/UserSignup';
+const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'));
+const AdminSignup = lazy(() => import('./pages/admin/AdminSignup'));
+const AdminLayout = lazy(() => import('./pages/admin/AdminLayout'));
+const UserLogin = lazy(() => import('./pages/auth/UserLogin'));
+const UserSignup = lazy(() => import('./pages/auth/UserSignup'));
 
 const SEO_KEY_BY_ROUTE = {
   '/': 'home',
@@ -181,12 +194,20 @@ const SeoManager = () => {
   return null;
 };
 
+const RouteFallback = () => (
+  <div className="flex min-h-[50vh] w-full items-center justify-center py-16">
+    <Loader className="w-10 h-10" color="text-primary" />
+  </div>
+);
+
 const PublicLayout = () => (
   <div className="flex flex-col min-h-screen bg-white">
     <SeoManager />
     <Navbar />
     <main className="flex-grow w-full">
-      <Outlet />
+      <Suspense fallback={<RouteFallback />}>
+        <Outlet />
+      </Suspense>
     </main>
     <Footer />
   </div>
@@ -195,7 +216,9 @@ const PublicLayout = () => (
 const AuthLayout = () => (
   <div className="min-h-screen bg-neutral-light">
     <SeoManager />
-    <Outlet />
+    <Suspense fallback={<RouteFallback />}>
+      <Outlet />
+    </Suspense>
   </div>
 );
 
@@ -240,6 +263,7 @@ const router = createBrowserRouter([
 
 const App = () => (
   <AuthProvider>
+    <BootPreloader />
     <RouterProvider router={router} />
   </AuthProvider>
 );

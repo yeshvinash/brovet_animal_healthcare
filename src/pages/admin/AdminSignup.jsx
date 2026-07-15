@@ -23,7 +23,7 @@ const PasswordField = ({ id, label, value, onChange }) => {
       <button
         type="button"
         onClick={() => setVisible((v) => !v)}
-        className="absolute right-3 top-[2.35rem] p-1 rounded-md text-neutral-muted hover:text-primary hover:bg-neutral-light transition"
+        className="absolute right-3 top-[2.35rem] p-1 rounded-md text-neutral-body hover:text-primary hover:bg-neutral-light transition"
         aria-label={visible ? 'Hide password' : 'Show password'}
       >
         {visible ? <Icons.EyeOff className="w-4 h-4" /> : <Icons.Eye className="w-4 h-4" />}
@@ -74,7 +74,7 @@ const AdminSignup = () => {
 
   if (admin) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-sm font-semibold text-neutral-muted">
+      <div className="min-h-screen flex items-center justify-center text-sm font-semibold text-neutral-body">
         Redirecting to dashboard...
       </div>
     );
@@ -128,7 +128,7 @@ const AdminSignup = () => {
           onChange={update('confirm')}
         />
 
-        <div className="rounded-xl border border-accent/25 bg-accent-light/50 px-3 py-2.5 text-xs text-neutral-body leading-relaxed">
+        <div className="rounded-xl border border-accent/40 bg-accent-light px-3 py-2.5 text-xs leading-relaxed text-neutral-dark">
           <strong className="text-accent-hover">Note:</strong> New admin accounts are stored locally in this browser for demo purposes.
         </div>
 

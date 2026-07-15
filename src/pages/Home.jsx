@@ -38,30 +38,34 @@ const Home = () => {
   ];
 
   return (
-    <div className="space-y-20 pb-20">
+    <div className="space-y-12 sm:space-y-16 lg:space-y-20 pb-12 sm:pb-16 lg:pb-20">
 
       {/* 1. HERO BANNER */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-primary-dark via-primary to-primary-hover text-white py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-gradient-to-r from-primary-dark via-primary to-primary-hover text-white py-12 sm:py-16 lg:py-28 px-4 sm:px-6 lg:px-8">
         {/* Soft grid decoration */}
         <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:24px_24px]"></div>
 
-        <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
           {/* Left Text */}
-          <div className="lg:col-span-7 space-y-6 text-left">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-xs text-xs font-semibold text-accent uppercase tracking-wider">
-              <Icons.Award className="w-4 h-4" /> ISO 9001:2015 & GMP Certified
+          <div className="lg:col-span-7 space-y-5 sm:space-y-6 text-left">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-xs text-xs font-semibold text-amber-200 uppercase tracking-wider">
+              <Icons.Award className="w-4 h-4 shrink-0" /> ISO 9001:2015 & GMP Certified
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
               Scientifically Formulated <span className="text-accent">Animal Healthcare</span> Products
             </h1>
-            <p className="text-lg text-slate-200 max-w-2xl leading-relaxed">
+            <p className="text-base sm:text-lg text-white/90 max-w-2xl leading-relaxed">
               Accelerate livestock productivity, milk yield, and immunity. Brovet is a premier B2B manufacturer, trader, and exporter of veterinary feed supplements, calcium tonics, and mineral mixtures.
             </p>
-            <div className="flex flex-wrap gap-4 pt-2">
-              <Button variant="accent" onClick={() => navigate('/products')} >
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 pt-1 sm:pt-2">
+              <Button variant="accent" onClick={() => navigate('/products')} className="w-full sm:w-auto min-h-11">
                 Explore Products
               </Button>
-              <Button variant="outline" onClick={() => navigate('/become-dealer')} className="border-white bg-transparent text-white hover:text-primary">
+              <Button
+                variant="outline-inverse"
+                onClick={() => navigate('/become-dealer')}
+                className="w-full sm:w-auto min-h-11"
+              >
                 Become a Dealer
               </Button>
             </div>
@@ -69,19 +73,19 @@ const Home = () => {
 
           {/* Right Hero Image/Mockup */}
           <div className="lg:col-span-5 flex justify-center relative">
-            <div className="relative w-full max-w-md aspect-square bg-white/5 rounded-2xl border border-white/10 p-4 shadow-2xl backdrop-blur-xs">
+            <div className="relative w-full max-w-md aspect-[4/3] sm:aspect-square bg-white/5 rounded-2xl border border-white/10 p-3 sm:p-4 shadow-2xl backdrop-blur-xs pb-16 sm:pb-4">
               <img
                 src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&q=80&w=600"
                 alt="Healthy Dairy Cattle Livestock"
                 className="w-full h-full object-cover rounded-xl shadow-inner border border-white/5"
               />
-              <div className="absolute -bottom-6 -left-6 bg-white text-neutral-dark p-4 rounded-xl shadow-lg border border-neutral-border flex items-center gap-3">
-                <div className="w-10 h-10 rounded bg-primary-light flex items-center justify-center">
+              <div className="absolute bottom-3 left-3 right-3 sm:bottom-auto sm:-bottom-4 sm:left-4 sm:right-auto bg-white text-neutral-dark p-3 sm:p-4 rounded-xl shadow-lg border border-neutral-border flex items-center gap-3">
+                <div className="w-10 h-10 shrink-0 rounded bg-primary-light flex items-center justify-center">
                   <Icons.CheckCircle className="w-6 h-6 text-primary" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <span className="block font-bold text-sm leading-tight text-primary-dark">100% Safe & Tested</span>
-                  <span className="block text-2xs text-neutral-muted">Approved feed ingredients</span>
+                  <span className="block text-xs text-neutral-muted">Approved feed ingredients</span>
                 </div>
               </div>
             </div>
@@ -91,14 +95,14 @@ const Home = () => {
 
       {/* 2. COMPANY STATISTICS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 p-8 rounded-2xl border border-neutral-border bg-neutral-light shadow-premium">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-0 divide-y sm:divide-y-0 sm:divide-x divide-neutral-border/50 rounded-2xl border border-neutral-border bg-neutral-light shadow-premium overflow-hidden">
           {stats.map((stat, idx) => (
-            <div key={idx} className="text-center space-y-2 border-r last:border-0 border-neutral-border/50">
+            <div key={idx} className="text-center space-y-2 p-4 sm:p-6">
               <div className="inline-flex justify-center p-2.5 rounded-lg bg-white shadow-2xs">
                 {stat.icon}
               </div>
-              <div className="text-3xl font-extrabold text-neutral-dark tracking-tight">{stat.value}</div>
-              <div className="text-xs font-semibold text-neutral-muted uppercase tracking-wider">{stat.label}</div>
+              <div className="text-2xl sm:text-3xl font-extrabold text-neutral-dark tracking-tight">{stat.value}</div>
+              <div className="text-xs font-semibold text-neutral-muted uppercase tracking-wider px-1">{stat.label}</div>
             </div>
           ))}
         </div>
@@ -108,7 +112,7 @@ const Home = () => {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div className="space-y-6">
           <div className="text-xs font-bold tracking-widest text-primary uppercase">About Brovet Animal Healthcare</div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-dark leading-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-neutral-dark leading-tight">
             Nurturing Livestock Health & Farm Prosperity Since 2018
           </h2>
           <p className="text-neutral-body text-md leading-relaxed">
@@ -122,7 +126,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="bg-slate-50 border border-neutral-border rounded-2xl p-8 space-y-6 shadow-premium relative">
+        <div className="bg-slate-50 border border-neutral-border rounded-2xl p-5 sm:p-8 space-y-6 shadow-premium relative">
           <div className="absolute top-0 right-0 transform translate-x-3 -translate-y-3 w-16 h-16 text-primary/10 opacity-60">
             <svg fill="currentColor" viewBox="0 0 24 24" className="w-full h-full">
               <path d="M11.19 12.07c-.07-.37-.12-.76-.12-1.15 0-2.82 2.29-5.12 5.12-5.12 1.04 0 2.01.31 2.82.85l-1.39 2.08c-.41-.23-.89-.37-1.42-.37-.9 0-1.63.73-1.63 1.63 0 .19.03.38.1.56l-3.48 1.52zm-8 0c-.07-.37-.12-.76-.12-1.15 0-2.82 2.29-5.12 5.12-5.12 1.04 0 2.01.31 2.82.85l-1.39 2.08c-.41-.23-.89-.37-1.42-.37-.9 0-1.63.73-1.63 1.63 0 .19.03.38.1.56L3.19 12.07z" />
@@ -143,11 +147,11 @@ const Home = () => {
       </section>
 
       {/* 4. PRODUCT CATEGORIES */}
-      <section className="bg-neutral-light border-y border-neutral-border py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto space-y-12">
-          <div className="text-center max-w-3xl mx-auto space-y-4">
+      <section className="bg-neutral-light border-y border-neutral-border py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto space-y-8 sm:space-y-12">
+          <div className="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4">
             <div className="text-xs font-bold tracking-widest text-primary uppercase">Categories</div>
-            <h2 className="text-3xl font-extrabold text-neutral-dark">Browse Our Specialty Formulations</h2>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-neutral-dark">Browse Our Specialty Formulations</h2>
             <p className="text-neutral-muted text-sm leading-relaxed">
               We manufacture a wide range of feed supplements targeted at specific livestock requirements, from milk boosting to udder health.
             </p>
@@ -179,13 +183,13 @@ const Home = () => {
       </section>
 
       {/* 5. FEATURED PRODUCTS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-4">
           <div className="space-y-3">
             <div className="text-xs font-bold tracking-widest text-primary uppercase">Product Portfolio</div>
-            <h2 className="text-3xl font-extrabold text-neutral-dark">Featured Veterinary Products</h2>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-neutral-dark">Featured Veterinary Products</h2>
           </div>
-          <Button variant="outline" onClick={() => navigate('/products')}>View All Products</Button>
+          <Button variant="outline" onClick={() => navigate('/products')} className="w-full sm:w-auto min-h-11">View All Products</Button>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -196,10 +200,10 @@ const Home = () => {
       </section>
 
       {/* 6. WHY CHOOSE BROVET */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        <div className="text-center max-w-3xl mx-auto space-y-4">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
+        <div className="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4">
           <div className="text-xs font-bold tracking-widest text-primary uppercase">Why Choose Us</div>
-          <h2 className="text-3xl font-extrabold text-neutral-dark">Setting Benchmarks in Animal Nutrition</h2>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-neutral-dark">Setting Benchmarks in Animal Nutrition</h2>
           <p className="text-neutral-muted text-sm">
             We focus on maximum absorption and absolute chemical safety, helping B2B buyers supply products that keep dairy farmers profitable.
           </p>
@@ -219,17 +223,17 @@ const Home = () => {
       </section>
 
       {/* 7. INDUSTRIES SERVED */}
-      <section className="bg-neutral-light border-y border-neutral-border py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto space-y-10">
-          <h2 className="text-2xl font-extrabold text-neutral-dark text-center">Industries & Markets We Serve</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <section className="bg-neutral-light border-y border-neutral-border py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto space-y-8 sm:space-y-10">
+          <h2 className="text-xl sm:text-2xl font-extrabold text-neutral-dark text-center">Industries & Markets We Serve</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center">
             {[
               { title: "Dairy Farms & Cooperatives", desc: "Supplying bulk calcium drums and feed additives to increase herd fat and milk yield." },
               { title: "Veterinarians & Clinics", desc: "Providing clinical-grade calcium gels and multi-vitamin therapies for animal recovery." },
               { title: "B2B Dealers & Feed Stores", desc: "Supplying packaged retail sizes (1L, 5L, 1kg) with healthy commercial margins." },
               { title: "Global Export Buyers", desc: "Manufacturing customized formulation batches with complete chemical certificate documentation." }
             ].map((item, idx) => (
-              <div key={idx} className="bg-white p-6 rounded-xl border border-neutral-border shadow-2xs space-y-2">
+              <div key={idx} className="bg-white p-5 sm:p-6 rounded-xl border border-neutral-border shadow-2xs space-y-2 text-left sm:text-center">
                 <h3 className="font-bold text-neutral-dark text-sm">{item.title}</h3>
                 <p className="text-xs text-neutral-muted leading-relaxed">{item.desc}</p>
               </div>
@@ -249,7 +253,7 @@ const Home = () => {
         </div>
         <div className="space-y-6">
           <div className="text-xs font-bold tracking-widest text-primary uppercase">Quality Assurance</div>
-          <h2 className="text-3xl font-extrabold text-neutral-dark">Zero-Compromise Product Safety Checks</h2>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-neutral-dark">Zero-Compromise Product Safety Checks</h2>
           <p className="text-neutral-body text-sm leading-relaxed">
             All our manufacturing batches undergo strict inspection inside our quality testing lab. We ensure heavy metals are well within safety boundaries and verify active mineral concentrations.
           </p>
@@ -274,11 +278,11 @@ const Home = () => {
       </section>
 
       {/* 9. TESTIMONIALS */}
-      <section className="bg-neutral-light border-y border-neutral-border py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto space-y-12">
+      <section className="bg-neutral-light border-y border-neutral-border py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto space-y-8 sm:space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <div className="text-xs font-bold tracking-widest text-primary uppercase">Client Reviews</div>
-            <h2 className="text-3xl font-extrabold text-neutral-dark">Feedback from the Dairy Ecosystem</h2>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-neutral-dark">Feedback from the Dairy Ecosystem</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -308,13 +312,13 @@ const Home = () => {
       </section>
 
       {/* 10. LATEST BLOGS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-4">
           <div className="space-y-3">
             <div className="text-xs font-bold tracking-widest text-primary uppercase">Insights & Articles</div>
-            <h2 className="text-3xl font-extrabold text-neutral-dark">Animal Husbandry Blog</h2>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-neutral-dark">Animal Husbandry Blog</h2>
           </div>
-          <Button variant="outline" onClick={() => navigate('/blogs')}>View All Posts</Button>
+          <Button variant="outline" onClick={() => navigate('/blogs')} className="w-full sm:w-auto min-h-11">View All Posts</Button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -346,10 +350,10 @@ const Home = () => {
       </section>
 
       {/* 11. FAQ SECTION */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
         <div className="text-center space-y-3">
           <div className="text-xs font-bold tracking-widest text-primary uppercase">FAQs</div>
-          <h2 className="text-3xl font-extrabold text-neutral-dark">Frequently Asked Questions</h2>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-neutral-dark">Frequently Asked Questions</h2>
         </div>
 
         <div>
@@ -373,18 +377,22 @@ const Home = () => {
 
       {/* 12. CALL TO ACTION (RFQ) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative overflow-hidden bg-primary rounded-2xl p-10 sm:p-16 text-center text-white shadow-2xl">
+        <div className="relative overflow-hidden bg-primary rounded-2xl p-6 sm:p-10 lg:p-16 text-center text-white shadow-2xl">
           <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:20px_20px]"></div>
-          <div className="relative z-10 max-w-3xl mx-auto space-y-6">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white">Expand Your Animal Care Product Portfolio</h2>
-            <p className="text-md text-emerald-100 max-w-xl mx-auto leading-relaxed">
+          <div className="relative z-10 max-w-3xl mx-auto space-y-5 sm:space-y-6">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">Expand Your Animal Care Product Portfolio</h2>
+            <p className="text-sm sm:text-base text-emerald-100 max-w-xl mx-auto leading-relaxed">
               Partner with Brovet Animal Healthcare. Apply for authorized dealerships, request custom pricing brochures, or request a bulk quotation today.
             </p>
-            <div className="flex flex-wrap justify-center gap-4 pt-4">
-              <Button variant="accent" onClick={() => navigate('/request-quotation')} className="px-6 py-3 font-bold text-base shadow-lg">
+            <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 pt-2 sm:pt-4">
+              <Button variant="accent" onClick={() => navigate('/request-quotation')} className="w-full sm:w-auto min-h-11 px-6 font-bold text-base shadow-lg">
                 Request Quotation
               </Button>
-              <Button variant="outline" onClick={() => navigate('/become-dealer')} className="border-white text-white hover:bg-white/10 px-6 py-3 text-base font-bold">
+              <Button
+                variant="outline-inverse"
+                onClick={() => navigate('/become-dealer')}
+                className="w-full sm:w-auto min-h-11 px-6 text-base font-bold"
+              >
                 Become Distributor
               </Button>
             </div>

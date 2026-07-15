@@ -190,7 +190,7 @@ const ProductDetails = () => {
             )}
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {product.minOrderQty && (
               <div className="rounded-xl border border-neutral-border bg-neutral-light/80 p-3">
                 <SimpleTooltip content="Minimum order quantity for B2B wholesale orders">
@@ -198,25 +198,25 @@ const ProductDetails = () => {
                     MOQ
                   </span>
                 </SimpleTooltip>
-                <span className="text-sm block font-semibold text-neutral-dark">{product.minOrderQty}</span>
+                <span className="text-sm block font-semibold text-neutral-dark break-words">{product.minOrderQty}</span>
               </div>
             )}
             {product.deliveryTime && (
               <div className="rounded-xl border border-neutral-border bg-neutral-light/80 p-3">
                 <span className="block text-2xs uppercase tracking-wider text-neutral-muted font-bold mb-1">Delivery</span>
-                <span className="text-sm block font-semibold text-neutral-dark">{product.deliveryTime}</span>
+                <span className="text-sm block font-semibold text-neutral-dark break-words">{product.deliveryTime}</span>
               </div>
             )}
             {product.packagingSizes && (
               <div className="rounded-xl border border-neutral-border bg-neutral-light/80 p-3">
                 <span className="block text-2xs uppercase tracking-wider text-neutral-muted font-bold mb-1">Pack Size</span>
-                <span className="text-sm block font-semibold text-neutral-dark">{product.packagingSizes}</span>
+                <span className="text-sm block font-semibold text-neutral-dark break-words">{product.packagingSizes}</span>
               </div>
             )}
             {product.suitableAnimals && (
               <div className="rounded-xl border border-neutral-border bg-neutral-light/80 p-3">
                 <span className="block text-2xs uppercase tracking-wider text-neutral-muted font-bold mb-1">Suitable For</span>
-                <span className="text-sm block font-semibold text-neutral-dark">{product.suitableAnimals}</span>
+                <span className="text-sm block font-semibold text-neutral-dark break-words">{product.suitableAnimals}</span>
               </div>
             )}
           </div>

@@ -59,7 +59,7 @@ const FAQs = () => {
 
       {/* Header */}
       <div className="py-6 border-b border-neutral-border mb-10">
-        <h1 className="text-3xl font-extrabold text-neutral-dark">Frequently Asked Questions</h1>
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-dark">Frequently Asked Questions</h1>
         <p className="text-neutral-muted text-sm mt-1 leading-relaxed">
           Find answers to common questions about dealership bounds, shipping timelines, quality assurance, and bulk pricing.
         </p>

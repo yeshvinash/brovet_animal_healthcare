@@ -82,7 +82,7 @@ const BecomeDealer = () => {
         {/* Left Side: Text and info */}
         <div className="lg:col-span-5 space-y-6">
           <div className="text-xs font-bold tracking-widest text-primary uppercase">Partnership Opportunities</div>
-          <h1 className="text-3xl font-extrabold text-neutral-dark tracking-tight leading-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-dark tracking-tight leading-tight">
             Become a Licensed Dealer / Distributor for Brovet
           </h1>
           <p className="text-neutral-body text-sm leading-relaxed">

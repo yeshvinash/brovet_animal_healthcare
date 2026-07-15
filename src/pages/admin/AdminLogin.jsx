@@ -23,7 +23,7 @@ const PasswordField = ({ id, label, value, onChange }) => {
       <button
         type="button"
         onClick={() => setVisible((v) => !v)}
-        className="absolute right-3 top-[2.35rem] p-1 rounded-md text-neutral-muted hover:text-primary hover:bg-neutral-light transition"
+        className="absolute right-3 top-[2.35rem] p-1 rounded-md text-neutral-body hover:text-primary hover:bg-neutral-light transition"
         aria-label={visible ? 'Hide password' : 'Show password'}
       >
         {visible ? <Icons.EyeOff className="w-4 h-4" /> : <Icons.Eye className="w-4 h-4" />}
@@ -58,7 +58,7 @@ const AdminLogin = () => {
 
   if (admin) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-sm font-semibold text-neutral-muted">
+      <div className="min-h-screen flex items-center justify-center text-sm font-semibold text-neutral-body">
         Redirecting to dashboard...
       </div>
     );
@@ -74,7 +74,7 @@ const AdminLogin = () => {
           Need a staff account?{' '}
           <a href="/admin/signup" className="font-bold text-primary hover:underline">Register admin</a>
           {' · '}
-          <a href="/login" className="font-semibold text-neutral-body hover:text-primary hover:underline">Customer login</a>
+          <a href="/login" className="font-bold text-neutral-dark hover:text-primary hover:underline">Customer login</a>
         </p>
       }
     >
@@ -103,7 +103,7 @@ const AdminLogin = () => {
         </Button>
       </form>
 
-      <p className="text-center text-3xs text-neutral-muted pt-1 border-t border-neutral-light">
+      <p className="text-center text-xs font-medium text-neutral-body pt-2 border-t border-neutral-border">
         Authorized personnel only. Demo authentication is client-side only.
       </p>
     </AuthShell>

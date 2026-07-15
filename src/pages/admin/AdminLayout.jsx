@@ -27,7 +27,7 @@ const AdminLayout = () => {
 
   if (!admin) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center px-4">
         <span className="text-sm font-semibold text-neutral-muted">Redirecting to login portal...</span>
       </div>
     );
@@ -51,17 +51,40 @@ const AdminLayout = () => {
     { id: 'settings', label: 'Site & SEO Settings', icon: <Icons.Settings className="w-4 h-4" /> },
   ];
 
-  return (
-    <div className="min-h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pt-6 pb-20">
+  const activeLabel = navItems.find((item) => item.id === activeTab)?.label;
 
-      <aside className="lg:col-span-3 bg-white border border-neutral-border rounded-xl overflow-hidden shadow-premium">
+  return (
+    <div className="min-h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start pt-4 sm:pt-6 pb-12 sm:pb-20">
+
+      {/* Mobile horizontal admin nav */}
+      <div className="lg:hidden col-span-full -mx-4 px-4">
+        <div className="flex gap-2 overflow-x-auto overscroll-x-contain pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              onClick={() => setActiveTab(item.id)}
+              className={`shrink-0 inline-flex items-center gap-2 min-h-11 px-3.5 rounded-lg text-xs font-semibold border transition-colors ${
+                activeTab === item.id
+                  ? 'bg-primary text-white border-primary shadow-2xs'
+                  : 'bg-white text-neutral-body border-neutral-border hover:border-primary/40 hover:text-primary'
+              }`}
+            >
+              {item.icon}
+              {item.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <aside className="hidden lg:block lg:col-span-3 bg-white border border-neutral-border rounded-xl overflow-hidden shadow-premium">
 
         <div className="p-5 border-b bg-neutral-light flex items-center gap-3">
           <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold">
             AD
           </div>
-          <div>
-            <span className="block font-bold text-neutral-dark text-xs">{admin.email}</span>
+          <div className="min-w-0">
+            <span className="block font-bold text-neutral-dark text-xs truncate">{admin.email}</span>
             <span className="block text-3xs text-emerald-600 font-bold uppercase tracking-wider">Super Administrator</span>
           </div>
         </div>
@@ -72,7 +95,7 @@ const AdminLayout = () => {
               key={item.id}
               type="button"
               onClick={() => setActiveTab(item.id)}
-              className={`w-full flex items-center gap-3 px-4 py-2.5 text-xs font-semibold rounded-md transition-colors ${
+              className={`w-full flex items-center gap-3 px-4 min-h-11 py-2.5 text-xs font-semibold rounded-md transition-colors ${
                 activeTab === item.id
                   ? 'bg-primary text-white shadow-2xs font-bold'
                   : 'text-neutral-body hover:bg-neutral-light hover:text-primary'
@@ -88,7 +111,7 @@ const AdminLayout = () => {
           <Button
             variant="ghost"
             onClick={handleLogout}
-            className="w-full text-red-600 hover:bg-red-50 hover:text-red-700 justify-start"
+            className="w-full text-red-600 hover:bg-red-50 hover:text-red-700 justify-start min-h-11"
             icon={<Icons.X className="w-4 h-4" />}
           >
             Logout Session
@@ -96,21 +119,31 @@ const AdminLayout = () => {
         </div>
       </aside>
 
-      <div className="lg:col-span-9 space-y-6">
+      <div className="lg:col-span-9 space-y-4 sm:space-y-6">
 
-        <div className="bg-white border p-5 rounded-xl shadow-premium flex items-center justify-between">
+        <div className="bg-white border p-4 sm:p-5 rounded-xl shadow-premium flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <span className="text-3xs uppercase tracking-widest text-primary font-bold">Workspace Portal</span>
-            <h1 className="text-xl font-extrabold text-neutral-dark mt-0.5">
-              {navItems.find(item => item.id === activeTab)?.label}
+            <h1 className="text-lg sm:text-xl font-extrabold text-neutral-dark mt-0.5">
+              {activeLabel}
             </h1>
           </div>
-          <span className="text-3xs text-neutral-muted font-bold uppercase tracking-wider">
-            Brovet System Online
-          </span>
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-3xs text-neutral-muted font-bold uppercase tracking-wider">
+              Brovet System Online
+            </span>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleLogout}
+              className="lg:hidden text-red-600 hover:bg-red-50 min-h-11"
+            >
+              Logout
+            </Button>
+          </div>
         </div>
 
-        <div className="fade-in">
+        <div className="fade-in min-w-0">
           {activeTab === 'dashboard' && <DashboardOverview setActiveTab={setActiveTab} />}
           {activeTab === 'products' && <ProductsManager />}
           {activeTab === 'categories' && <CategoriesManager />}
@@ -122,9 +155,7 @@ const AdminLayout = () => {
           {activeTab === 'messages' && <InquiriesViewer activeModule="messages" />}
           {activeTab === 'settings' && <SettingsManager />}
         </div>
-
       </div>
-
     </div>
   );
 };

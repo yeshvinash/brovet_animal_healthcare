@@ -36,7 +36,7 @@ const Blogs = () => {
 
       {/* Header */}
       <div className="py-6 border-b border-neutral-border mb-10">
-        <h1 className="text-3xl font-extrabold text-neutral-dark">Animal Health & Husbandry Blogs</h1>
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-dark">Animal Health & Husbandry Blogs</h1>
         <p className="text-neutral-muted text-sm mt-1 leading-relaxed">
           Stay informed with scientific guides, tips, and insights on cattle feed, milk fat enhancement, and veterinary medicine.
         </p>

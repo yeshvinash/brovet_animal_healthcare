@@ -23,7 +23,7 @@ const PasswordField = ({ id, label, value, onChange }) => {
       <button
         type="button"
         onClick={() => setVisible((v) => !v)}
-        className="absolute right-3 top-[2.35rem] p-1 rounded-md text-neutral-muted hover:text-primary hover:bg-neutral-light transition"
+        className="absolute right-3 top-[2.35rem] p-1 rounded-md text-neutral-body hover:text-primary hover:bg-neutral-light transition"
         aria-label={visible ? 'Hide password' : 'Show password'}
       >
         {visible ? <Icons.EyeOff className="w-4 h-4" /> : <Icons.Eye className="w-4 h-4" />}
@@ -78,7 +78,7 @@ const UserSignup = () => {
 
   if (user) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-sm font-semibold text-neutral-muted">
+      <div className="min-h-screen flex items-center justify-center text-sm font-semibold text-neutral-body">
         Redirecting...
       </div>
     );
@@ -151,13 +151,13 @@ const UserSignup = () => {
           onChange={update('confirm')}
         />
 
-        <label className="flex items-start gap-2 text-xs text-neutral-muted cursor-pointer select-none">
+        <label className="flex items-start gap-2 text-xs font-medium text-neutral-body cursor-pointer select-none">
           <input type="checkbox" required className="mt-0.5 rounded border-neutral-border text-primary focus:ring-primary" />
           <span>
             I agree to the{' '}
-            <a href="/terms-conditions" className="text-primary font-semibold hover:underline">Terms</a>
+            <a href="/terms-conditions" className="text-primary font-bold hover:underline">Terms</a>
             {' '}and{' '}
-            <a href="/privacy-policy" className="text-primary font-semibold hover:underline">Privacy Policy</a>.
+            <a href="/privacy-policy" className="text-primary font-bold hover:underline">Privacy Policy</a>.
           </span>
         </label>
 

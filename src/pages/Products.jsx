@@ -23,6 +23,7 @@ const Products = () => {
   const [selectedAnimal, setSelectedAnimal] = useState('');
   const [sortBy, setSortBy] = useState('name-asc');
   const [currentPage, setCurrentPage] = useState(1);
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   // Sync category filter with URL query parameter e.g. /products?category=Liquid%20Calcium
   useEffect(() => {
@@ -110,97 +111,133 @@ const Products = () => {
   const indexOfFirstProduct = indexOfLastProduct - PRODUCTS_PER_PAGE;
   const currentProducts = sortedProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
+  const activeFilterCount = [
+    searchTerm,
+    selectedCategory,
+    selectedAnimal,
+    sortBy !== 'name-asc' ? sortBy : '',
+  ].filter(Boolean).length;
+
+  const filterFields = (
+    <>
+      <div className="flex items-center justify-between border-b border-neutral-light pb-4">
+        <h2 className="font-bold text-neutral-dark text-md flex items-center gap-1.5">
+          <Icons.Filter className="w-5 h-5 text-primary" /> Filter Options
+        </h2>
+        <button 
+          type="button"
+          onClick={resetFilters} 
+          className="inline-flex items-center min-h-11 px-2 text-xs text-primary font-bold hover:underline"
+        >
+          Reset All
+        </button>
+      </div>
+
+      <div>
+        <label className="block text-xs font-bold text-neutral-dark uppercase tracking-wider mb-2">Search Catalog</label>
+        <div className="relative">
+          <input
+            type="text"
+            placeholder="Product name, benefit..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+            className="w-full min-h-11 pl-9 pr-4 py-2.5 text-sm text-neutral-dark bg-white border border-neutral-border rounded-md shadow-2xs placeholder:text-neutral-muted focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+          />
+          <Icons.Search className="w-4 h-4 text-neutral-muted absolute left-3 top-1/2 -translate-y-1/2" />
+        </div>
+      </div>
+
+      <Select
+        id="product-category"
+        label="Product Category"
+        placeholder="All Categories"
+        value={selectedCategory}
+        onChange={handleCategoryChange}
+        options={categories.map((cat) => ({ value: cat.name, label: cat.name }))}
+        className="[&_label]:text-xs [&_label]:font-bold [&_label]:uppercase [&_label]:tracking-wider [&_label]:text-neutral-dark"
+      />
+
+      <Select
+        id="product-animal"
+        label="Animal Suitability"
+        placeholder="All Animals"
+        value={selectedAnimal}
+        onChange={handleAnimalChange}
+        options={animalTypes}
+        className="[&_label]:text-xs [&_label]:font-bold [&_label]:uppercase [&_label]:tracking-wider [&_label]:text-neutral-dark"
+      />
+
+      <Select
+        id="product-sort"
+        label="Sort Results"
+        showPlaceholder={false}
+        value={sortBy}
+        onChange={(e) => setSortBy(e.target.value)}
+        options={[
+          { value: 'name-asc', label: 'Alphabetical (A - Z)' },
+          { value: 'name-desc', label: 'Alphabetical (Z - A)' },
+          { value: 'price-asc', label: 'Price (Low - High)' },
+          { value: 'price-desc', label: 'Price (High - Low)' },
+        ]}
+        className="[&_label]:text-xs [&_label]:font-bold [&_label]:uppercase [&_label]:tracking-wider [&_label]:text-neutral-dark"
+      />
+    </>
+  );
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-20">
       
       {/* Breadcrumbs */}
       <Breadcrumbs items={[{ label: "Products Catalog" }]} />
 
       {/* Hero Header Section */}
-      <div className="py-6 border-b border-neutral-border mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div className="py-5 sm:py-6 border-b border-neutral-border mb-6 sm:mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-extrabold text-neutral-dark">Veterinary Feed Supplements</h1>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-dark">Veterinary Feed Supplements</h1>
           <p className="text-neutral-muted text-sm mt-1 leading-relaxed">
             Scientifically balanced formulations supporting milk fat, livestock growth, fertility, and udder recovery.
           </p>
         </div>
-        <div className="text-xs text-neutral-muted font-bold uppercase tracking-wider bg-neutral-light px-3 py-1.5 rounded border">
+        <div className="text-xs text-neutral-body font-bold uppercase tracking-wider bg-neutral-light px-3 py-1.5 rounded border border-neutral-border self-start">
           Showing {filteredProducts.length} Products
         </div>
       </div>
 
+      {/* Mobile filter toggle — products stay first */}
+      <div className="lg:hidden mb-4">
+        <button
+          type="button"
+          onClick={() => setFiltersOpen((open) => !open)}
+          className="w-full inline-flex items-center justify-between min-h-11 px-4 py-3 rounded-xl border border-neutral-border bg-white shadow-premium text-sm font-bold text-neutral-dark"
+          aria-expanded={filtersOpen}
+        >
+          <span className="inline-flex items-center gap-2">
+            <Icons.Filter className="w-5 h-5 text-primary" />
+            Filters & Sort
+            {activeFilterCount > 0 && (
+              <span className="inline-flex items-center justify-center min-w-5 h-5 px-1.5 rounded-full bg-primary text-white text-2xs">
+                {activeFilterCount}
+              </span>
+            )}
+          </span>
+          <Icons.ChevronDown className={`w-5 h-5 text-neutral-muted transition-transform ${filtersOpen ? 'rotate-180' : ''}`} />
+        </button>
+        {filtersOpen && (
+          <div className="mt-3 bg-white border border-neutral-border rounded-xl p-4 sm:p-6 shadow-premium space-y-5">
+            {filterFields}
+          </div>
+        )}
+      </div>
+
       {/* Filters Sidebar + Grid Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8 items-start">
         
-        {/* Left Side: Filter Form Panel */}
-        <div className="bg-white border border-neutral-border rounded-xl p-6 shadow-premium space-y-6 lg:sticky lg:top-24">
-          <div className="flex items-center justify-between border-b border-neutral-light pb-4">
-            <h2 className="font-bold text-neutral-dark text-md flex items-center gap-1.5">
-              <Icons.Filter className="w-5 h-5 text-primary" /> Filter Options
-            </h2>
-            <button 
-              onClick={resetFilters} 
-              className="text-xs text-primary font-bold hover:underline"
-            >
-              Reset All
-            </button>
-          </div>
-
-          {/* Search Term */}
-          <div>
-            <label className="block text-xs font-bold text-neutral-muted uppercase tracking-wider mb-2">Search Catalog</label>
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Product name, benefit..."
-                value={searchTerm}
-                onChange={handleSearchChange}
-                className="w-full pl-9 pr-4 py-2.5 text-sm text-neutral-dark bg-white border border-neutral-border rounded-md shadow-2xs focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
-              <Icons.Search className="w-4 h-4 text-neutral-muted absolute left-3 top-3.5" />
-            </div>
-          </div>
-
-          {/* Category Filter */}
-          <Select
-            id="product-category"
-            label="Product Category"
-            placeholder="All Categories"
-            value={selectedCategory}
-            onChange={handleCategoryChange}
-            options={categories.map((cat) => ({ value: cat.name, label: cat.name }))}
-            className="[&_label]:text-xs [&_label]:font-bold [&_label]:uppercase [&_label]:tracking-wider [&_label]:text-neutral-muted"
-          />
-
-          {/* Animal Type Filter */}
-          <Select
-            id="product-animal"
-            label="Animal Suitability"
-            placeholder="All Animals"
-            value={selectedAnimal}
-            onChange={handleAnimalChange}
-            options={animalTypes}
-            className="[&_label]:text-xs [&_label]:font-bold [&_label]:uppercase [&_label]:tracking-wider [&_label]:text-neutral-muted"
-          />
-
-          {/* Sorting */}
-          <Select
-            id="product-sort"
-            label="Sort Results"
-            showPlaceholder={false}
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
-            options={[
-              { value: 'name-asc', label: 'Alphabetical (A - Z)' },
-              { value: 'name-desc', label: 'Alphabetical (Z - A)' },
-              { value: 'price-asc', label: 'Price (Low - High)' },
-              { value: 'price-desc', label: 'Price (High - Low)' },
-            ]}
-            className="[&_label]:text-xs [&_label]:font-bold [&_label]:uppercase [&_label]:tracking-wider [&_label]:text-neutral-muted"
-          />
+        {/* Desktop filter panel */}
+        <div className="hidden lg:block bg-white border border-neutral-border rounded-xl p-6 shadow-premium space-y-6 lg:sticky lg:top-24">
+          {filterFields}
         </div>
 
-        {/* Right Side: Product Card Grid */}
+        {/* Product Card Grid */}
         <div className="lg:col-span-3 space-y-8">
           {currentProducts.length > 0 ? (
             <>

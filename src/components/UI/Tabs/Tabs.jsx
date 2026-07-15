@@ -101,7 +101,9 @@ function TabsList({
                 aria-orientation={parent.orientation}
                 className={cn(
                     'group/tabs-list inline-flex w-fit max-w-full items-center justify-start',
-                    parent.orientation === 'vertical' ? 'flex-col h-fit' : 'flex-row flex-wrap',
+                    parent.orientation === 'vertical'
+                      ? 'flex-col h-fit'
+                      : 'flex-row flex-nowrap overflow-x-auto overscroll-x-contain [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
                     variant === 'line' && parent.orientation === 'horizontal' && 'w-full',
                     listVariants[variant] || listVariants.default,
                     className
@@ -153,9 +155,10 @@ function TabsTrigger({
             tabIndex={isActive ? 0 : -1}
             onClick={() => !disabled && setValue(value)}
             className={cn(
-                'relative inline-flex items-center justify-center gap-1.5 text-sm font-semibold whitespace-nowrap transition-all duration-150',
+                'relative inline-flex shrink-0 items-center justify-center gap-1.5 text-sm font-semibold whitespace-nowrap transition-all duration-150',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
                 'disabled:pointer-events-none disabled:opacity-50',
+                'min-h-11',
                 orientation === 'vertical' && 'w-full justify-start',
                 styles.base,
                 isActive && styles.active,
