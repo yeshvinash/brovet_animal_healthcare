@@ -93,16 +93,10 @@ const Products = () => {
 
   // Sort products logic
   const sortedProducts = [...filteredProducts].sort((a, b) => {
-    if (sortBy === 'name-asc') {
-      return a.name.localeCompare(b.name);
-    } else if (sortBy === 'name-desc') {
+    if (sortBy === 'name-desc') {
       return b.name.localeCompare(a.name);
-    } else if (sortBy === 'price-asc') {
-      return (a.price || 0) - (b.price || 0);
-    } else if (sortBy === 'price-desc') {
-      return (b.price || 0) - (a.price || 0);
     }
-    return 0;
+    return a.name.localeCompare(b.name);
   });
 
   // Pagination logic
@@ -176,8 +170,6 @@ const Products = () => {
         options={[
           { value: 'name-asc', label: 'Alphabetical (A - Z)' },
           { value: 'name-desc', label: 'Alphabetical (Z - A)' },
-          { value: 'price-asc', label: 'Price (Low - High)' },
-          { value: 'price-desc', label: 'Price (High - Low)' },
         ]}
         className="[&_label]:text-xs [&_label]:font-bold [&_label]:uppercase [&_label]:tracking-wider [&_label]:text-neutral-dark"
       />

@@ -81,6 +81,8 @@ const ProductDetails = () => {
     );
   }
 
+  const specifications = product.specifications || [];
+
   const relatedProducts = db.getProducts()
     .filter(p => p.category === product.category && p.id !== product.id)
     .slice(0, 3);
@@ -181,7 +183,7 @@ const ProductDetails = () => {
               {product.name}
             </h1>
             {product.price != null && (
-              <div className="flex flex-wrap items-end gap-2">
+              <div className="product-price flex flex-wrap items-end gap-2">
                 <span className="text-3xl font-extrabold text-primary">
                   ₹{Number(product.price).toLocaleString('en-IN')}
                 </span>
@@ -296,7 +298,7 @@ const ProductDetails = () => {
           </div>
 
           {/* Specifications Table */}
-          {product.specifications && product.specifications.length > 0 && (
+          {specifications.length > 0 && (
             <div className="space-y-3">
               <h2 className="text-xl font-extrabold text-neutral-dark border-b pb-2">Product Specifications</h2>
               <div className="border border-neutral-border rounded-lg overflow-hidden shadow-2xs">
@@ -308,12 +310,15 @@ const ProductDetails = () => {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {product.specifications.map((spec, i) => (
-                      <TableRow key={i}>
-                        <TableCell className="font-semibold text-neutral-dark">{spec.parameter}</TableCell>
-                        <TableCell>{spec.value}</TableCell>
-                      </TableRow>
-                    ))}
+                    {specifications.map((spec, i) => {
+                      const isPrice = String(spec.parameter || '').trim().toLowerCase() === 'price';
+                      return (
+                        <TableRow key={i} className={isPrice ? 'product-price' : undefined}>
+                          <TableCell className="font-semibold text-neutral-dark">{spec.parameter}</TableCell>
+                          <TableCell>{spec.value}</TableCell>
+                        </TableRow>
+                      );
+                    })}
                   </TableBody>
                 </Table>
               </div>

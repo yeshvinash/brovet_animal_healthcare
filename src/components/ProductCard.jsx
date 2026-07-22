@@ -82,18 +82,19 @@ const ProductCard = ({ product }) => {
 
         <div className="mt-auto flex items-end justify-between gap-3 border-t border-neutral-light pt-3.5">
           <div className="min-w-0">
-            {priceLabel ? (
-              <>
+            {priceLabel && (
+              <div className="product-price">
                 <p className="text-2xs font-semibold uppercase tracking-wider text-neutral-body">
                   Price / piece
                 </p>
                 <p className="truncate text-xl font-extrabold tracking-tight text-primary-dark">
                   {priceLabel}
                 </p>
-              </>
-            ) : (
-              <p className="text-sm font-semibold text-neutral-muted">Request quote</p>
+              </div>
             )}
+            <p className="product-price-fallback text-sm font-semibold text-neutral-muted">
+              Request quote
+            </p>
           </div>
 
           <span className="inline-flex h-10 shrink-0 items-center gap-1 rounded-full bg-primary px-3.5 text-xs font-bold text-white shadow-sm transition duration-200 group-hover:bg-primary-hover group-hover:shadow-md">

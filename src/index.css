@@ -100,3 +100,14 @@
     transform: translateY(0);
   }
 }
+
+/* Temporarily hide product prices until accurate values are ready.
+   To show prices again: remove/comment these rules and hide .product-price-fallback. */
+.product-price {
+  display: none !important;
+}
+
+.product-price-fallback {
+  display: block;
+}
+
