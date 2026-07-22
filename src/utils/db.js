@@ -647,9 +647,9 @@ const SEED_SETTINGS = {
   established: "2018",
   managingDirector: "Mr. Ketan Bavchandbhai Patoliya",
   address: "Plot No.-3, Saurastra Patel Society, Gaurishanker Street, Jalalpore Road, Navsari - 396445, Gujarat, India",
-  phoneNumbers: ["+91 98251 76543", "+91 2637 258963"],
-  whatsappNumber: "+919825176543",
-  email: "info@brovet.com",
+  phoneNumbers: ["+91 77779 99631", "+91 81415 84859"],
+  whatsappNumber: "917777999631",
+  email: "brovethealth@gmail.com",
   businessHours: "Monday - Saturday: 9:00 AM to 6:00 PM (Sunday Closed)",
   socialLinks: {
     facebook: "https://facebook.com/brovetanimalhealthcare",
@@ -885,7 +885,42 @@ export const db = {
   },
 
   // Settings
-  getSettings: () => readJson('brovet_settings', SEED_SETTINGS),
+  getSettings: () => {
+    const settings = readJson('brovet_settings', SEED_SETTINGS);
+    const phones = settings.phoneNumbers || [];
+    const hasLegacyPhones = phones.some(
+      (p) =>
+        String(p).includes('98251') ||
+        String(p).includes('2637') ||
+        String(p).includes('258963')
+    );
+    const hasLegacyWhatsapp =
+      String(settings.whatsappNumber || '').includes('98251');
+    const hasLegacyEmail =
+      String(settings.email || '').toLowerCase() === 'info@brovet.com';
+
+    if (hasLegacyPhones || hasLegacyWhatsapp || hasLegacyEmail) {
+      const updated = {
+        ...SEED_SETTINGS,
+        ...settings,
+        phoneNumbers: SEED_SETTINGS.phoneNumbers,
+        whatsappNumber: SEED_SETTINGS.whatsappNumber,
+        email: SEED_SETTINGS.email,
+      };
+      localStorage.setItem('brovet_settings', JSON.stringify(updated));
+      return updated;
+    }
+
+    return {
+      ...SEED_SETTINGS,
+      ...settings,
+      phoneNumbers: settings.phoneNumbers?.length
+        ? settings.phoneNumbers
+        : SEED_SETTINGS.phoneNumbers,
+      whatsappNumber: settings.whatsappNumber || SEED_SETTINGS.whatsappNumber,
+      email: settings.email || SEED_SETTINGS.email,
+    };
+  },
   saveSettings: (settings) => {
     localStorage.setItem('brovet_settings', JSON.stringify(settings));
     return settings;

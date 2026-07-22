@@ -41,7 +41,7 @@ const FAQs = () => {
     {
       category: "Samples & Catalogues",
       q: "Can B2B buyers request product testing samples?",
-      a: "Yes. Licensed veterinary distributors, veterinary hospitals, or large dairy cooperatives can request sample bottles of key formulations like Chelated Magical-DS or Brocal-Forte by submitting a formal request via email (info@brovet.com) with company details."
+      a: "Yes. Licensed veterinary distributors, veterinary hospitals, or large dairy cooperatives can request sample bottles of key formulations like Chelated Magical-DS or Brocal-Forte by submitting a formal request via email (brovethealth@gmail.com) with company details."
     }
   ];
 
